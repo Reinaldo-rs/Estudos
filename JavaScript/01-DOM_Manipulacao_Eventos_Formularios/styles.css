@@ -16,7 +16,8 @@ body {
     align-items: center;
     justify-content: flex-start;
     min-height: 100vh;
-    padding: 40px 20px 20px; /* Espaço superior para não colar no topo */
+    padding: 40px 20px 20px;
+    /* Espaço superior para não colar no topo */
 }
 
 /* Estrutura da página */
@@ -37,14 +38,18 @@ body {
 }
 
 /* Tipografia */
-h1, h2, p {
-    max-width: 100%; /* Permitir que ocupem a mesma largura */
+h1,
+h2,
+p {
+    max-width: 100%;
+    /* Permitir que ocupem a mesma largura */
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
 
-h1, h2 {
+h1,
+h2 {
     font-weight: 700;
     color: #6d28d9;
     margin-bottom: 15px;
@@ -68,14 +73,18 @@ form {
     gap: 10px;
     max-width: 400px;
     margin: 0 auto;
+    width: 100%; /* faz com que o formulário ocupe toda a largura disponível dentro de seu contêiner pai */
 }
 
 label {
-    align-self: flex-start; /* Garante alinhamento à esquerda */
+    align-self: flex-start;
+    /* Garante alinhamento à esquerda */
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
-input, textarea {
+input,
+textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #6d28d9;
@@ -84,7 +93,8 @@ input, textarea {
     background-color: #faf5ff;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
     border-color: #5b21b6;
     outline: none;
 }
@@ -149,7 +159,7 @@ footer {
     .container {
         padding: 10px;
     }
-    
+
     .grid {
         grid-template-columns: 1fr;
     }

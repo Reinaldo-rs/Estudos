@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Devs</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles.css">
     <script src="./script.js" defer></script>
 </head>
+
 <body>
     <header class="container">
         <h1>Cadastro de Devs</h1> <br>
@@ -16,17 +18,20 @@
     <main class="container">
         <section class="grid">
             <form id="formCad">
-                <h2>Tela de cadastro de desenvolvedores</h2>
+                <h2 id="subTitle1">Tela de cadastro de desenvolvedores</h2>
                 <label for="name">Nome Completo:</label>
                 <input type="text" id="name" name="name" placeholder="Digite seu nome completo" required>
-                
-                <button id="AddTec">Adicionar nova tecnoloia</button>
+
+                <button id="addTec">Adicionar nova tecnoloia</button>
             </form>
         </section>
         <section class="grid">
-                <form id="formXp"></form>
+            <form id="formTec">
+                <!-- Tecnologias serão adicionadas dinamicamente aqui -->
+            </form>
         </section>
     </main>
-    
+
 </body>
+
 </html>
