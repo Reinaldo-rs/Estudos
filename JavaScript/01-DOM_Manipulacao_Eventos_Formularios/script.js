@@ -1,5 +1,5 @@
 const addTec = document.getElementById("addTec")
-let countTec= 0;
+let countTec = 0;
 
 addTec.addEventListener("click", function (ev) {
 
@@ -8,13 +8,21 @@ addTec.addEventListener("click", function (ev) {
     countTec += 1
 
     const formTec = document.getElementById("formTec")
+    formTec.addEventListener("submit", function (ev) {
+        ev.preventDefault()
+    })
 
     // Inicio da funcao que ira chamar os texts
+    const removeTec = document.createElement("button") // preciso corrigir o posicionamento do botão no CSS pois todos os botões estão ficando no mesmo lugar
+    removeTec.id = "removeTec"
+    removeTec.className = "close"
+    removeTec.innerText = "🗙"
+
     const labelName = document.createElement("label")
     labelName.setAttribute("for", "name")
     labelName.className = "labelForm"
     labelName.innerText = `${countTec}º Tecnologia dominada`
-    
+
     const nameTec = document.createElement("input")
     nameTec.type = "text"
     nameTec.id = "nameTec"
@@ -23,6 +31,8 @@ addTec.addEventListener("click", function (ev) {
     nameTec.required = true
 
     // Inicio da funcao que ira chamar os radios
+    const hr = document.createElement('hr')
+
     const levelContainer = document.createElement('div')
     levelContainer.className = "level-container"
 
@@ -36,16 +46,16 @@ addTec.addEventListener("click", function (ev) {
 
     const levelLabelBeginner1 = document.createElement('label')
     levelLabelBeginner1.setAttribute("for", `beginner-${countTec}`)
-    levelLabelBeginner1.className  = "labelLevel1"
+    levelLabelBeginner1.className = "labelLevel1"
     levelLabelBeginner1.innerText = "🌱"
-    
+
     const levelLabelBeginner2 = document.createElement('label')
     levelLabelBeginner2.setAttribute("for", `beginner-${countTec}`)
-    levelLabelBeginner2.className  = "labelLevel2"
+    levelLabelBeginner2.className = "labelLevel2"
     levelLabelBeginner2.innerText = "Iniciante 0-2 anos"
 
     levelBeginner.append(levelTecBeginner, levelLabelBeginner1, levelLabelBeginner2)
-    
+
 
     const levelIntermediate = document.createElement('div')
     levelIntermediate.className = "level"
@@ -57,15 +67,15 @@ addTec.addEventListener("click", function (ev) {
 
     const levelLabelIntermediate1 = document.createElement('label')
     levelLabelIntermediate1.setAttribute("for", `intermediate-${countTec}`)
-    levelLabelIntermediate1.className  = "labelLevel1"
+    levelLabelIntermediate1.className = "labelLevel1"
     levelLabelIntermediate1.innerText = "🔥"
-    
+
     const levelLabelIntermediate2 = document.createElement('label')
     levelLabelIntermediate2.setAttribute("for", `intermediate-${countTec}`)
-    levelLabelIntermediate2.className  = "labelLevel2"
+    levelLabelIntermediate2.className = "labelLevel2"
     levelLabelIntermediate2.innerText = "Intermediário 3-4 anos"
 
-    
+
     levelIntermediate.append(levelTecIntermediate, levelLabelIntermediate1, levelLabelIntermediate2)
 
 
@@ -79,20 +89,20 @@ addTec.addEventListener("click", function (ev) {
 
     const levelLabelAdvanced1 = document.createElement('label')
     levelLabelAdvanced1.setAttribute("for", `advanced-${countTec}`)
-    levelLabelAdvanced1.className  = "labelLevel1"
+    levelLabelAdvanced1.className = "labelLevel1"
     levelLabelAdvanced1.innerText = "🚀"
-    
+
     const levelLabelAdvanced2 = document.createElement('label')
     levelLabelAdvanced2.setAttribute("for", `advanced-${countTec}`)
-    levelLabelAdvanced2.className  = "labelLevel2"
+    levelLabelAdvanced2.className = "labelLevel2"
     levelLabelAdvanced2.innerText = "Avançado 5+ anos"
 
-    
+
     levelAdvanced.append(levelTecAdvanced, levelLabelAdvanced1, levelLabelAdvanced2)
 
 
     levelContainer.append(levelBeginner, levelIntermediate, levelAdvanced)
 
-    formTec.append(labelName, nameTec, levelContainer)    
+    formTec.append(hr, removeTec, labelName, nameTec, levelContainer)
 })
 
