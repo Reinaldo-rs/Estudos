@@ -70,8 +70,6 @@ p {
 
 /* Formulários */
 form {
-    position: relative;
-    /* Necessário para o posicionamento absoluto do botão close dentro do form */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -86,8 +84,8 @@ form {
     align-self: flex-start;
     /* Garante alinhamento à esquerda */
     font-weight: bold;
-    margin-bottom: 5px;
     margin-right: auto;
+    padding: 5px;
 }
 
 input,
@@ -126,19 +124,38 @@ button:hover {
     transform: scale(1.05);
 }
 
+/* As configurações da rowTec foram copiadas do form, só para agilizar a configuração do botão close com a labelForm
+adicionei somente o position, para posicionar o botão*/
+.rowTec {
+    position: relative;
+    /* Necessário para o posicionamento absoluto do botão close dentro do form */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+    /* faz com que o formulário ocupe toda a largura disponível dentro de seu contêiner pai */
+}
 
+/*Preciso centralizar melhor o emoji dentro do botão*/
 .close {
     background-color: #6d28d9;
     color: white;
-    padding: 10px 10px;
+    padding: 5px 5px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
     width: 100%;
-    max-width: 40px;
-    margin-top: 20px;
-    font-weight: 900;
+    height: 100%;
+    max-width: 35.59px;
+    max-height: 35.59px;;
+    margin-top: 0px;
+    font-size: 0.6rem;
+    text-align: center;
+    font-weight: 600;
     margin-left: auto;
     /* Empurra o botão para a direita */
     position: absolute;
@@ -176,8 +193,10 @@ button:hover {
 .level-container {
     display: flex;
     gap: 20px;
+    justify-content: space-between;
     align-items: center;
     caret-color: transparent;
+    width: 100%;
 }
 
 .level {
@@ -222,7 +241,7 @@ hr {
     /* espessura constante da linha */
     background-color: purple !important;
     /* cor roxa */
-    margin: 10px 0 !important;
+    margin: 5px 0px !important;
     /* espaçamento uniforme */
     width: 100% !important;
     /* largura total */

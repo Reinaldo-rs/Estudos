@@ -1,6 +1,7 @@
 const addTec = document.getElementById("addTec")
 let countTec = 0;
 
+// Alterar o layout e o posicionamento do botão que adiciona um campo de tecnologia
 addTec.addEventListener("click", function (ev) {
 
     ev.preventDefault()
@@ -13,7 +14,10 @@ addTec.addEventListener("click", function (ev) {
     })
 
     // Inicio da funcao que ira chamar os texts
-    const removeTec = document.createElement("button") // preciso corrigir o posicionamento do botão no CSS pois todos os botões estão ficando no mesmo lugar
+    const rowTec = document.createElement("div")
+    rowTec.className = "rowTec"
+
+    const removeTec = document.createElement("button")
     removeTec.id = "removeTec"
     removeTec.className = "close"
     removeTec.innerText = "🗙"
@@ -28,7 +32,6 @@ addTec.addEventListener("click", function (ev) {
     nameTec.id = "nameTec"
     nameTec.name = "nameTec"
     nameTec.placeholder = "Digite aqui o nome da tecnologia"
-    nameTec.required = true
 
     // Inicio da funcao que ira chamar os radios
     const hr = document.createElement('hr')
@@ -56,7 +59,6 @@ addTec.addEventListener("click", function (ev) {
 
     levelBeginner.append(levelTecBeginner, levelLabelBeginner1, levelLabelBeginner2)
 
-
     const levelIntermediate = document.createElement('div')
     levelIntermediate.className = "level"
 
@@ -75,9 +77,7 @@ addTec.addEventListener("click", function (ev) {
     levelLabelIntermediate2.className = "labelLevel2"
     levelLabelIntermediate2.innerText = "Intermediário 3-4 anos"
 
-
     levelIntermediate.append(levelTecIntermediate, levelLabelIntermediate1, levelLabelIntermediate2)
-
 
     const levelAdvanced = document.createElement('div')
     levelAdvanced.className = "level"
@@ -97,12 +97,11 @@ addTec.addEventListener("click", function (ev) {
     levelLabelAdvanced2.className = "labelLevel2"
     levelLabelAdvanced2.innerText = "Avançado 5+ anos"
 
-
     levelAdvanced.append(levelTecAdvanced, levelLabelAdvanced1, levelLabelAdvanced2)
-
 
     levelContainer.append(levelBeginner, levelIntermediate, levelAdvanced)
 
-    formTec.append(hr, removeTec, labelName, nameTec, levelContainer)
-})
+    rowTec.append(removeTec, labelName)
 
+    formTec.append(hr, rowTec, nameTec, levelContainer)
+})
