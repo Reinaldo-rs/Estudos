@@ -19,11 +19,20 @@
     <main class="container">
         <section class="grid">
             <form id="formCad">
-                <h2 id="subTitle1">Tela de cadastro de desenvolvedores</h2>
-                <label for="nameDev" class="labelForm">Nome Completo:</label>
-                <input type="text" id="nameDev" name="nameDev" placeholder="Digite seu nome completo" required>
+
+                <!-- Inicio bloco de informações pessoais -->
+                <div class="personal-info">
+                    <h2 class="personal-info__title">Tela de cadastro de desenvolvedores</h2>
+                    <label for="nameDev" class="personal-info__label">Nome Completo:</label>
+                    <input type="text" id="nameDev" name="nameDev" class="personal-info__input" placeholder="Digite seu nome completo" required>
+                </div>
+                <!-- Fim bloco de informações pessoais -->
               
-                <button id="addTec">Adicionar nova tecnoloia</button>
+                <!-- Inicio bloco de ações -->
+                <div class="action-buttons">
+                    <button id="addTec" class="action-buttons__add">Adicionar nova tecnologia</button>
+                </div>
+                <!-- Fim bloco de ações -->
             </form>
         </section>
     </main>

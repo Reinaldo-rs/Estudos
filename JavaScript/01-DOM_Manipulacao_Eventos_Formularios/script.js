@@ -15,122 +15,141 @@ addTec.addEventListener("click", function (ev) {
     })
 
     // Inicio da funcao que ira chamar os texts
-    const rowTec = document.createElement("div")
-    rowTec.className = "rowTec"
 
-    const removeTec = document.createElement("button")
-    removeTec.id = "removeTec"
-    removeTec.className = "close"
-    removeTec.innerText = "🗙"
+    const techContainer = document.createElement("div")
+    techContainer.id = "tech-container"
 
-    const labelName = document.createElement("label")
-    labelName.setAttribute("for", "nameTec")
-    labelName.className = "labelForm"
-    labelName.innerText = `${countTec}º Tecnologia dominada`
+    const techList = document.createElement("div")
+    techList.className = "tech-list"
+    techList.id = `tech-list-${countTec}`
 
-    const nameTec = document.createElement("input")
-    nameTec.type = "text"
-    nameTec.id = "nameTec"
-    nameTec.name = "nameTec"
-    nameTec.placeholder = "Digite aqui o nome da tecnologia"
-
-    // Inicio da funcao que ira chamar os radios
     const hr = document.createElement('hr')
+
+    // Cabeçalho lista de tecnologias
+    const techListHeader = document.createElement("div")
+    techListHeader.className = "tech-list__header"
+
+    const techListRemove = document.createElement("button")
+    techListRemove.className = "tech-list__remove"
+    techListRemove.innerText = "🗙"
+
+    const techListLabel = document.createElement("label")
+    techListLabel.className = "tech-list__label"
+    techListLabel.innerText = `${countTec}ª Tecnologia Dominada`
+    techListHeader.append(techListRemove, techListLabel)
+
+    // Nome da tecnologia
+    const techListInput = document.createElement("input")
+    techListInput.type = "text"
+    techListInput.name = "nameTe"
+    techListInput.className = "tech-list__input"
+    techListInput.placeholder = "Digite aqui o nome da tecnologia"
 
     const levelContainer = document.createElement('div')
     levelContainer.className = "level-container"
 
+    // Iniciante
     const levelBeginner = document.createElement('div')
     levelBeginner.className = "level"
-
-    const levelTecBeginner = document.createElement('input')
-    levelTecBeginner.type = "radio"
-    levelTecBeginner.id = `beginner-${countTec}`
-    levelTecBeginner.name = `xpTec-${countTec}`
-
+    
+    
+    const beginner = document.createElement('input')
+    beginner.type = "radio"
+    beginner.id = `beginner-${countTec}`
+    beginner.name = `xpTec-${countTec}`
+    
     const levelLabelBeginner1 = document.createElement('label')
     levelLabelBeginner1.setAttribute("for", `beginner-${countTec}`)
-    levelLabelBeginner1.className = "labelLevel1"
+    levelLabelBeginner1.className = "level__icon"
     levelLabelBeginner1.innerText = "🌱"
-
+    
     const levelLabelBeginner2 = document.createElement('label')
     levelLabelBeginner2.setAttribute("for", `beginner-${countTec}`)
-    levelLabelBeginner2.className = "labelLevel2"
+    levelLabelBeginner2.className = "level__text"
     levelLabelBeginner2.innerText = "Iniciante 0-2 anos"
+    levelBeginner.append(beginner, levelLabelBeginner1, levelLabelBeginner2)
 
-    levelBeginner.append(levelTecBeginner, levelLabelBeginner1, levelLabelBeginner2)
-
+    // Intermediario
+    
     const levelIntermediate = document.createElement('div')
     levelIntermediate.className = "level"
-
-    const levelTecIntermediate = document.createElement('input')
-    levelTecIntermediate.type = "radio"
-    levelTecIntermediate.id = `intermediate-${countTec}`
-    levelTecIntermediate.name = `xpTec-${countTec}`
-
+    
+    const intermediate = document.createElement('input')
+    intermediate.type = "radio"
+    intermediate.id = `intermediate-${countTec}`
+    intermediate.name = `xpTec-${countTec}`
+    
     const levelLabelIntermediate1 = document.createElement('label')
     levelLabelIntermediate1.setAttribute("for", `intermediate-${countTec}`)
-    levelLabelIntermediate1.className = "labelLevel1"
+    levelLabelIntermediate1.className = "level__icon"
     levelLabelIntermediate1.innerText = "🔥"
-
+    
     const levelLabelIntermediate2 = document.createElement('label')
     levelLabelIntermediate2.setAttribute("for", `intermediate-${countTec}`)
-    levelLabelIntermediate2.className = "labelLevel2"
+    levelLabelIntermediate2.className = "level__text"
     levelLabelIntermediate2.innerText = "Intermediário 3-4 anos"
+    levelIntermediate.append(intermediate, levelLabelIntermediate1, levelLabelIntermediate2)
 
-    levelIntermediate.append(levelTecIntermediate, levelLabelIntermediate1, levelLabelIntermediate2)
-
+    // Avançado
+    
     const levelAdvanced = document.createElement('div')
     levelAdvanced.className = "level"
-
-    const levelTecAdvanced = document.createElement('input')
-    levelTecAdvanced.type = "radio"
-    levelTecAdvanced.id = `advanced-${countTec}`
-    levelTecAdvanced.name = `xpTec-${countTec}`
-
+    
+    const advanced = document.createElement('input')
+    advanced.type = "radio"
+    advanced.id = `advanced-${countTec}`
+    advanced.name = `xpTec-${countTec}`
+    
     const levelLabelAdvanced1 = document.createElement('label')
     levelLabelAdvanced1.setAttribute("for", `advanced-${countTec}`)
-    levelLabelAdvanced1.className = "labelLevel1"
+    levelLabelAdvanced1.className = "level__icon"
     levelLabelAdvanced1.innerText = "🚀"
-
+    
     const levelLabelAdvanced2 = document.createElement('label')
     levelLabelAdvanced2.setAttribute("for", `advanced-${countTec}`)
-    levelLabelAdvanced2.className = "labelLevel2"
+    levelLabelAdvanced2.className = "level__text"
     levelLabelAdvanced2.innerText = "Avançado 5+ anos"
-
-    levelAdvanced.append(levelTecAdvanced, levelLabelAdvanced1, levelLabelAdvanced2)
+    levelAdvanced.append(advanced, levelLabelAdvanced1, levelLabelAdvanced2)
 
     levelContainer.append(levelBeginner, levelIntermediate, levelAdvanced)
 
-    const cadTec = document.createElement("button")
-    cadTec.id = "cadTecLast"
-    cadTec.className = "cadTec"
-    cadTec.innerText = "Cadastrar Desenvolvedor"
+    techList.append(hr, techListHeader, techListInput, levelContainer)
 
-    rowTec.append(removeTec, labelName)
+    techContainer.appendChild(techList)
 
-    formCad.append(hr, rowTec, nameTec, levelContainer)
+    // Preciso achar um jeito de não criar varios techContainer, e sim apenas um
+    // Vou tentar usar o exemplo que fiz para o botão de cadastro de desenvolvedors
+
+    const actionButtons = document.querySelector("div[class='action-buttons']")
     
+    const actionButtonsSubmit = document.createElement("button")
+    actionButtonsSubmit.id = "cad TecLast"
+    actionButtonsSubmit.className = "action-buttons__submit"
+    actionButtonsSubmit.innerText = "Cadastrar Desenvolvedor"
+    
+    formCad.append(techContainer, actionButtons)
+
     if (countTec === 1) {
-        formCad.appendChild(cadTec)
+        actionButtons.appendChild(actionButtonsSubmit)
     }
 
-    const cadTecLast = document.querySelector("#cadTecLast")
+    const cadTecLast = document.getElementById("cadTecLast")
     if (cadTecLast) {
-        formCad.appendChild(cadTecLast)
+        actionButtons.appendChild(cadTecLast)
     }
+
 
     // Botão de cadastro que armazena as informações em um array e limpa o formulário.
-    cadTec.addEventListener("click", function (ev) {
+    actionButtonsSubmit.addEventListener("click", function (ev) {
         ev.preventDefault
 
         const nameDev = document.querySelector("#nameDev").value
-        const tec = []
+        const tech = []
 
         document.querySelectorAll("input[type='radio']:checked").forEach(function (element, i) {
             const previousValue = element.closest("div[class='level']").closest("div[class='level-container']").previousElementSibling.value;
             const next = element.nextElementSibling.nextElementSibling.innerText
-            tec.push({
+            tech.push({
                 id: i,
                 nomeTecnologia: previousValue,
                 experiencia: next
@@ -139,29 +158,41 @@ addTec.addEventListener("click", function (ev) {
         })
         cad.push({
             nome: nameDev,
-            tecnologias: tec
+            tecnologias: tech
         })
         console.log(cad)
 
-        document.querySelectorAll("hr").forEach(function (element) {
-            element.remove();
-        });
-        document.querySelectorAll("div[class='rowTec']").forEach(function (element) {
-            element.remove();
-        });
-        document.querySelectorAll("input[id='nameTec']").forEach(function (element) {
-            element.remove();
-        });
-        document.querySelectorAll("div[class='level-container']").forEach(function (element) {
-            element.remove();
-        });
-        document.querySelectorAll("button[id='cadTecLast']").forEach(function (element) {
-            element.remove();
-        });
+        document.querySelector("div[id='tech-container']").remove()
+        document.querySelector("button[class='action-buttons__submit']").remove()
+
+        // document.querySelectorAll("hr").forEach(function (element) {
+        //     element.remove();
+        // });
+        // document.querySelectorAll("div[class='rowTec']").forEach(function (element) {
+        //     element.remove();
+        // });
+        // document.querySelectorAll("input[id='nameTec']").forEach(function (element) {
+        //     element.remove();
+        // });
+        // document.querySelectorAll("div[class='level-container']").forEach(function (element) {
+        //     element.remove();
+        // });
+        // document.querySelectorAll("button[id='cadTecLast']").forEach(function (element) {
+        //     element.remove();
+        // });
         countTec = 0
     })
+
+    removeTec.addEventListener("click", function (ev) {
+        ev.preventDefault()
+
+        document.querySelector("hr").remove()
+        document.querySelector("div[class='rowTec']").remove()
+        document.querySelector("input[id='nameTec']").remove()
+        document.querySelector("div[class='level-container']").remove()
+        document.querySelector("button[id='cadTecLast']").remove()
+        countTec -= 1
+        console.log("Clicou")
+
+    })
 })
-
-
-
-
