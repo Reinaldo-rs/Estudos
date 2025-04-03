@@ -51,18 +51,18 @@ addTec.addEventListener("click", function (ev) {
     // Iniciante
     const levelBeginner = document.createElement('div')
     levelBeginner.className = "level"
-    
-    
+
+
     const beginner = document.createElement('input')
     beginner.type = "radio"
     beginner.id = `beginner-${countTec}`
     beginner.name = `xpTec-${countTec}`
-    
+
     const levelLabelBeginner1 = document.createElement('label')
     levelLabelBeginner1.setAttribute("for", `beginner-${countTec}`)
     levelLabelBeginner1.className = "level__icon"
     levelLabelBeginner1.innerText = "🌱"
-    
+
     const levelLabelBeginner2 = document.createElement('label')
     levelLabelBeginner2.setAttribute("for", `beginner-${countTec}`)
     levelLabelBeginner2.className = "level__text"
@@ -70,20 +70,20 @@ addTec.addEventListener("click", function (ev) {
     levelBeginner.append(beginner, levelLabelBeginner1, levelLabelBeginner2)
 
     // Intermediario
-    
+
     const levelIntermediate = document.createElement('div')
     levelIntermediate.className = "level"
-    
+
     const intermediate = document.createElement('input')
     intermediate.type = "radio"
     intermediate.id = `intermediate-${countTec}`
     intermediate.name = `xpTec-${countTec}`
-    
+
     const levelLabelIntermediate1 = document.createElement('label')
     levelLabelIntermediate1.setAttribute("for", `intermediate-${countTec}`)
     levelLabelIntermediate1.className = "level__icon"
     levelLabelIntermediate1.innerText = "🔥"
-    
+
     const levelLabelIntermediate2 = document.createElement('label')
     levelLabelIntermediate2.setAttribute("for", `intermediate-${countTec}`)
     levelLabelIntermediate2.className = "level__text"
@@ -91,20 +91,20 @@ addTec.addEventListener("click", function (ev) {
     levelIntermediate.append(intermediate, levelLabelIntermediate1, levelLabelIntermediate2)
 
     // Avançado
-    
+
     const levelAdvanced = document.createElement('div')
     levelAdvanced.className = "level"
-    
+
     const advanced = document.createElement('input')
     advanced.type = "radio"
     advanced.id = `advanced-${countTec}`
     advanced.name = `xpTec-${countTec}`
-    
+
     const levelLabelAdvanced1 = document.createElement('label')
     levelLabelAdvanced1.setAttribute("for", `advanced-${countTec}`)
     levelLabelAdvanced1.className = "level__icon"
     levelLabelAdvanced1.innerText = "🚀"
-    
+
     const levelLabelAdvanced2 = document.createElement('label')
     levelLabelAdvanced2.setAttribute("for", `advanced-${countTec}`)
     levelLabelAdvanced2.className = "level__text"
@@ -121,12 +121,12 @@ addTec.addEventListener("click", function (ev) {
     // Vou tentar usar o exemplo que fiz para o botão de cadastro de desenvolvedors
 
     const actionButtons = document.querySelector("div[class='action-buttons']")
-    
+
     const actionButtonsSubmit = document.createElement("button")
-    actionButtonsSubmit.id = "cad TecLast"
+    actionButtonsSubmit.id = "cadTecLast"
     actionButtonsSubmit.className = "action-buttons__submit"
-    actionButtonsSubmit.innerText = "Cadastrar Desenvolvedor"
-    
+    actionButtonsSubmit.innerText = "💾"
+
     formCad.append(techContainer, actionButtons)
 
     if (countTec === 1) {
@@ -141,7 +141,7 @@ addTec.addEventListener("click", function (ev) {
 
     // Botão de cadastro que armazena as informações em um array e limpa o formulário.
     actionButtonsSubmit.addEventListener("click", function (ev) {
-        ev.preventDefault
+        ev.preventDefault()
 
         const nameDev = document.querySelector("#nameDev").value
         const tech = []
@@ -162,37 +162,31 @@ addTec.addEventListener("click", function (ev) {
         })
         console.log(cad)
 
-        document.querySelector("div[id='tech-container']").remove()
+        document.querySelectorAll("div[id='tech-container']").forEach(function (element) {
+            element.remove()
+        })
+
         document.querySelector("button[class='action-buttons__submit']").remove()
 
-        // document.querySelectorAll("hr").forEach(function (element) {
-        //     element.remove();
-        // });
-        // document.querySelectorAll("div[class='rowTec']").forEach(function (element) {
-        //     element.remove();
-        // });
-        // document.querySelectorAll("input[id='nameTec']").forEach(function (element) {
-        //     element.remove();
-        // });
-        // document.querySelectorAll("div[class='level-container']").forEach(function (element) {
-        //     element.remove();
-        // });
-        // document.querySelectorAll("button[id='cadTecLast']").forEach(function (element) {
-        //     element.remove();
-        // });
         countTec = 0
     })
 
-    removeTec.addEventListener("click", function (ev) {
-        ev.preventDefault()
+    // Preciso fazer com que a posição da tecnologia também mude, preciso renomealas usando forEach talvez
+    // removeTec.addEventListener("click", function (ev) {
+    //     ev.preventDefault()
 
-        document.querySelector("hr").remove()
-        document.querySelector("div[class='rowTec']").remove()
-        document.querySelector("input[id='nameTec']").remove()
-        document.querySelector("div[class='level-container']").remove()
-        document.querySelector("button[id='cadTecLast']").remove()
-        countTec -= 1
-        console.log("Clicou")
+    //     document.querySelector("hr").remove()
+    //     document.querySelector("div[class='rowTec']").remove()
+    //     document.querySelector("input[id='nameTec']").remove()
+    //     document.querySelector("div[class='level-container']").remove()
+    //     document.querySelector("button[id='cadTecLast']").remove()
+    //     countTec -= 1
+    //     console.log("Clicou")
 
-    })
+    // })
+
+    addTec.scrollIntoView({
+        behavior: "smooth",  // Rolagem suave
+        block: "nearest"      // Navegador escolherá a posição mais próxima para evitar rolagens desnecessárias
+      })
 })
