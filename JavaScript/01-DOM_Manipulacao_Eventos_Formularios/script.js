@@ -30,7 +30,7 @@ addTec.addEventListener("click", function (ev) {
     techListHeader.className = "tech-list__header"
 
     const techListRemove = document.createElement("button")
-    techListRemove.className = "tech-list__remove"
+    techListRemove.className = `tech-list__remove ${countTec}`
     techListRemove.innerText = "🗙"
 
     const techListLabel = document.createElement("label")
@@ -147,7 +147,7 @@ addTec.addEventListener("click", function (ev) {
         const tech = []
 
         document.querySelectorAll("input[type='radio']:checked").forEach(function (element, i) {
-            const previousValue = element.closest("div[class='level']").closest("div[class='level-container']").previousElementSibling.value;
+            const previousValue = element.closest("div[class='level']").closest("div[class='level-container']").previousElementSibling.value
             const next = element.nextElementSibling.nextElementSibling.innerText
             tech.push({
                 id: i,
@@ -171,22 +171,20 @@ addTec.addEventListener("click", function (ev) {
         countTec = 0
     })
 
-    // Preciso fazer com que a posição da tecnologia também mude, preciso renomealas usando forEach talvez
-    // removeTec.addEventListener("click", function (ev) {
-    //     ev.preventDefault()
+    techListRemove.addEventListener("click", function (ev) {
+        ev.preventDefault()
 
-    //     document.querySelector("hr").remove()
-    //     document.querySelector("div[class='rowTec']").remove()
-    //     document.querySelector("input[id='nameTec']").remove()
-    //     document.querySelector("div[class='level-container']").remove()
-    //     document.querySelector("button[id='cadTecLast']").remove()
-    //     countTec -= 1
-    //     console.log("Clicou")
-
-    // })
+        techListRemove.closest("div[id='tech-container']").remove()
+        
+        document.querySelectorAll("button.tech-list__remove").forEach((element, i) => {
+            countTec = i + 1
+            element.className = `tech-list__remove ${countTec}`
+            element.nextElementSibling.innerText = `${countTec}ª Tecnologia Dominada`
+        })
+    })
 
     addTec.scrollIntoView({
         behavior: "smooth",  // Rolagem suave
         block: "nearest"      // Navegador escolherá a posição mais próxima para evitar rolagens desnecessárias
-      })
+    })
 })
