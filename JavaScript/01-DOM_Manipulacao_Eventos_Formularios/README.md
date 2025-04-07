@@ -36,7 +36,7 @@ Este projeto faz parte do meu estudo sobre manipulação do DOM, eventos e formu
    ```
 2. Acesse a pasta do projeto:
    ```sh
-   cd estudos/HTML_CSS/01-DOM_Manipulacao_Eventos_Formularios
+   cd estudos/JavaScript/01-DOM_Manipulacao_Eventos_Formularios
    ```
 3. Abra o arquivo `index.html` em um navegador.
 4. Interaja com a página cadastrando desenvolvedores e suas tecnologias.
@@ -45,5 +45,6 @@ Este projeto faz parte do meu estudo sobre manipulação do DOM, eventos e formu
 - [ ] Adicionar armazenamento em `localStorage` para salvar os cadastros.
 - [ ] Criar um layout mais responsivo.
 - [ ] Adicionar um botão para editar cadastros já inseridos.
+- [ ] Adiionar um botão para visualizar os cadastros já inseridos
 
-📌 **Última atualização:** `18/03/2025`
+📌 **Última atualização:** `07/04/2025`
