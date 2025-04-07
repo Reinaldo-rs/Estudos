@@ -175,12 +175,18 @@ addTec.addEventListener("click", function (ev) {
         ev.preventDefault()
 
         techListRemove.closest("div[id='tech-container']").remove()
-        
-        document.querySelectorAll("button.tech-list__remove").forEach((element, i) => {
-            countTec = i + 1
-            element.className = `tech-list__remove ${countTec}`
-            element.nextElementSibling.innerText = `${countTec}ª Tecnologia Dominada`
+
+        // Obter a lista atualizada de botões
+        let buttons = document.querySelectorAll("button.tech-list__remove")
+
+        // Atualizar o countTec com base no número de botões restantes
+        countTec = buttons.length === 0 ? 0 : buttons.length
+
+        buttons.forEach((element, i) => {
+            element.className = `tech-list__remove ${i + 1}`
+            element.nextElementSibling.innerText = `${i + 1}ª Tecnologia Dominada`
         })
+
     })
 
     addTec.scrollIntoView({
