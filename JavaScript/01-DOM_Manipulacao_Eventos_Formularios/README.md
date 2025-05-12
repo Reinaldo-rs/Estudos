@@ -47,4 +47,4 @@ Este projeto faz parte do meu estudo sobre manipulação do DOM, eventos e formu
 - [ ] Adicionar um botão para editar cadastros já inseridos.
 - [ ] Adiionar um botão para visualizar os cadastros já inseridos
 
-📌 **Última atualização:** `07/04/2025`
+📌 **Última atualização:** `12/05/2025`
