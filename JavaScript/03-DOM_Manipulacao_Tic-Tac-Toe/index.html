@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="title">Tic-Tac-Toe / Jogo da Velha</h1>
+    </header>
+
+    <main class="main-content">
+        <section class="player-setup">
+            <div class="player-input">
+                <label for="player1">Player 1 (X):</label>
+                <input type="text" id="player1" name="player1" placeholder="Nome do Jogador 1">
+            </div>
+            <div class="player-input">
+                <label for="player2">Player 2 (O):</label>
+                <input type="text" id="player2" name="player2" placeholder="Nome do Jogador 2">
+            </div>
+        </section>
+
+        <section class="game-info">
+            <h2 class="turn-indicator" id="turnIndicator">Vez de: <span id="player-name">Player 1</span></h2>
+        </section>
+
+        <section class="game-board" id="gameBoard">
+            <div class="cell" data-cell-index="0"><span class="cell-value"></span></div>
+            <div class="cell" data-cell-index="1"><span class="cell-value"></span></div>
+            <div class="cell" data-cell-index="2"><span class="cell-value"></span></div>
+            <div class="cell" data-cell-index="3"><span class="cell-value"></span></div>
+            <div class="cell" data-cell-index="4"><span class="cell-value"></span></div>
+            <div class="cell" data-cell-index="5"><span class="cell-value"></span></div>
+            <div class="cell" data-cell-index="6"><span class="cell-value"></span></div>
+            <div class="cell" data-cell-index="7"><span class="cell-value"></span></div>
+            <div class="cell" data-cell-index="8"><span class="cell-value"></span></div>
+        </section>
+
+        <!-- Isso é temporario, vai ser adicionado pelo DOM -->
+        <div class="linha-diagonal"></div>
+
+        <section class="controls">
+            <button id="resetButton" class="reset-button">Reiniciar Jogo</button>
+        </section>
+    </main>
+
+    <footer class="footer">
+
+    </footer>
+</body>
+
+</html>
