@@ -1,31 +1,36 @@
 /* 1. Reset e padrão geral */
 * {
-    box-sizing: border-box; /* Inclui padding e border no cálculo do width/height */
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
   
   /* 2. Variáveis de cor */
   :root {
-    --bg-color: #212529;      /* Cor de fundo principal */
-    --font-color: #f1f5f9;    /* Cor do texto */
-    --primary-color: #b388ff; /* Cor de destaque (usada no tabuleiro) */
+    --bg-color: #212529;
+    --font-color: #f1f5f9;
+    --primary-color: #b388ff;
     --secondary-color: #c6a3ff;
-    --error-color: #ff0043;   /* Cor para mensagens de erro ou alerta */
+    --details-color: #556B2F;
+    --line-color: #A3D39C;
+    --line-inclination: 45deg;
+    --line-length: 140%;
+    --line-top: 50%;
+    --line-left: 50%;
   }
 
   /* 3. Corpo da página */
   body {
-    background-color: var(--bg-color); /* Cor de fundo da página */
-    color: var(--font-color);          /* Cor do texto geral */
-    font-family: "Ubuntu", sans-serif; /* Fonte amigável */
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    font-family: "Ubuntu", sans-serif;
   }
   
   /* 4. Container principal */
   main {
     display: block;
     margin: 0 auto;
-    max-width: 40rem;                /* Limita largura para boa leitura e responsividade */
+    max-width: 40rem;
     padding: 0 1.5rem 2.5rem;
     position: relative;
   }
@@ -33,7 +38,7 @@
   /* 5. Cabeçalho */
   header {
     padding: 2rem 0;
-    text-align: center;             /* Centraliza o título */
+    text-align: center;
   }
   
   /* 6. Campos de jogador */
@@ -59,8 +64,8 @@
     padding: 0.5rem;
     border: 2px solid var(--primary-color);
     border-radius: 5px;
-    background-color: #fff;
-    color: #000;
+    background-color: var(--font-color);
+    color: var(--bg-color);
   }
   
   /* 7. Indicador de turno */
@@ -73,42 +78,50 @@
   /* 8. Tabuleiro do jogo */
   #gameBoard {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas iguais */
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
     max-width: 600px;
     margin: 0 auto;
     user-select: none;
     outline: none;
     caret-color: transparent;
+    position: relative;
+    aspect-ratio: 1 / 1;
   }
   
   .cell {
-    aspect-ratio: 1 / 1;                            /* Mantém quadrado mesmo em telas pequenas */
-    background-color: var(--primary-color);        /* Cor da célula */
-    border: 5px solid var(--bg-color);             /* Borda interna escura */
+    aspect-ratio: 1 / 1;
+    color: var(--bg-color);
+    background-color: var(--primary-color);
+    border: 5px solid var(--bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 11rem;                                /* Tamanho do "X" ou "O" */
+    font-size: 11rem;
     line-height: 1;
-    cursor: pointer;                               /* Mostra que pode clicar */
+    cursor: pointer;
     transition: background-color 0.2s ease;
   }
   
   .cell:hover {
-    background-color: var(--secondary-color); /* Pequeno efeito ao passar o mouse */
+    background-color: var(--secondary-color);
   }
   
   .cell-value {
     display: inline-block;
     line-height: 1;
     vertical-align: middle;
-    pointer-events: none;         /* O clique atinge a célula, não o texto */
+    pointer-events: none;
   }
   
   .cell.off{
     cursor: default;
     background-color: var(--secondary-color); 
+  }
+
+  .cell.win{
+    cursor: default;
+    background-color: var(--details-color); 
   }
 
   /* 9. Botão de reset */
@@ -120,8 +133,8 @@
   .reset-button {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
-    background-color: var(--error-color);
-    color: #fff;
+    background-color: var(--details-color);
+    color: var(--font-color);
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -129,18 +142,27 @@
   }
   
   .reset-button:hover {
-    background-color: #d00038; /* Escurece ao passar o mouse */
+    background-color: var(--details-color);
   }
-  
-  /* Preciso ajustar essa linha */
-  .linha-diagonal {
+
+  /* 10. Linha do vencedor */
+  .line-winner {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 140%;       /* 140% da largura do container */
-    height: 0.6vw;     /* altura da linha responsiva à largura da viewport */
-    max-height: 6px;   /* limite máximo da espessura da linha */
-    background-color: red;
-    transform: translate(-50%, -50%) rotate(45deg);
+    top: var(--line-top);
+    left: var(--line-left);
+    width: var(--line-length);
+    height: 0;
+    box-shadow: 0 0 0 3px var(--line-color);
+    max-height: 6px;
+    background-color: var(--line-color);
+    transform: rotate(var(--line-inclination)) translate(-50%, -50%) scaleX(0);
+    transform-origin: center left;
+    animation: scratch 0.5s ease-out forwards;
     z-index: 10;
+  }
+
+  @keyframes scratch {
+    to {
+      transform: rotate(var(--line-inclination)) translate(-50%, -50%) scaleX(1);
+    }
   }

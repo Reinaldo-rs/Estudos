@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     <title>Jogo da Velha</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="components/custom-alert-modal.css">
+    <script type="module" src="script.js" defer></script>
 </head>
 
 <body>
@@ -44,10 +45,7 @@
             <div class="cell" data-cell-index="7"><span class="cell-value"></span></div>
             <div class="cell" data-cell-index="8"><span class="cell-value"></span></div>
         </section>
-
-        <!-- Isso é temporario, vai ser adicionado pelo DOM -->
-        <div class="linha-diagonal"></div>
-
+        
         <section class="controls">
             <button id="resetButton" class="reset-button">Reiniciar Jogo</button>
         </section>

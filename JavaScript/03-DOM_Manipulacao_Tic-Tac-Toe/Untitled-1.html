@@ -1,0 +1,255 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<div id="player-turn-indicator" class="container">
+  <h2>Turno Atual</h2>
+
+  <div id="players-list" class="players-list"></div>
+
+  <div id="current-player" class="current-player">
+    <div class="player-info">
+      <div class="avatar"></div>
+      <div>
+        <p class="small">Vez de</p>
+        <p class="player-name"></p>
+      </div>
+    </div>
+    <div class="timer">
+      <i class="fa-regular fa-clock"></i> <span id="time-left"></span>
+    </div>
+  </div>
+
+  <!-- Nao vai existir botão, apenas a fução atrelada a ele -->
+  <button id="next-turn">Próximo Jogador</button>
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+  * {
+    box-sizing: border-box
+  }
+
+  /* Configura fonte padrão */
+  body {
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+  /* Contêiner principal */
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 40rem;
+    margin: auto;
+    background: #212529;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Título principal */
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #f1f5f9;
+  }
+
+  /* Bloco do jogador atual */
+  .current-player {
+    width: 100%;
+    height: 5rem;
+    /* margin-bottom: 2rem; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: white;
+  }
+
+  /* Informação do jogador atual */
+  .player-info {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Avatar do jogador */
+  .avatar {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 9999px;
+    background: white;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+
+  /* Texto pequeno */
+  .small {
+    font-size: 0.875rem;
+  }
+
+  /* Nome do jogador */
+  .player-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  /* Relógio/timer */
+  .timer {
+    font-family: monospace;
+    font-size: 1.25rem;
+  }
+
+  /* Lista de jogadores */
+  .players-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Item de cada jogador */
+  .player-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    background: white;
+  }
+
+  /* Estilo do jogador ativo */
+  .player-item.active {
+    background: #e5e7eb;
+    border: 2px solid;
+  }
+
+  /* Avatar na lista de jogadores */
+  .player-avatar {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 9999px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 0.75rem;
+  }
+
+  /* Bolinha pulsante */
+  .pulse {
+    right: 0.75rem;
+    height: 0.75rem;
+    width: 0.75rem;
+    border-radius: 9999px;
+    background: #22c55e;
+    animation: pulse 1s infinite;
+    margin-left: auto;
+  }
+
+  /* Animação da bolinha pulsante */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    50% {
+      transform: scale(1.5);
+      opacity: 0.5;
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Botão de próximo turno */
+  button {
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+  }
+
+  /* Efeito hover no botão */
+  button:hover {
+    background: #4338ca;
+  }
+</style>
+
+<script>
+  const players = [
+    { id: 1, name: "João", color: "#3b82f6", avatar: "J" },
+    { id: 2, name: "Ana", color: "#8b5cf6", avatar: "A" },
+  ];
+
+  let currentPlayer = 1;
+  let timeLeft = 30;
+
+  const currentDiv = document.getElementById('current-player');
+  const playerName = currentDiv.querySelector('.player-name');
+  const avatarDiv = currentDiv.querySelector('.avatar');
+  const timeLeftSpan = document.getElementById('time-left');
+  const playersList = document.getElementById('players-list');
+
+  function renderCurrentPlayer() {
+    const player = players[currentPlayer - 1];
+    currentDiv.style.background = player.color;
+    avatarDiv.textContent = player.avatar;
+    playerName.textContent = player.name;
+    timeLeftSpan.textContent = timeLeft + 's';
+  }
+
+  function renderPlayersList() {
+    playersList.innerHTML = '';
+    players.forEach(player => {
+      const div = document.createElement('div');
+      div.className = 'player-item';
+      if (player.id === currentPlayer) {
+        div.classList.add('active');
+        div.style.borderColor = player.color;
+      }
+
+      const avatar = document.createElement('div');
+      avatar.className = 'player-avatar';
+      avatar.style.background = player.color;
+      avatar.textContent = player.avatar;
+
+      div.appendChild(avatar);
+      div.append(player.name);
+
+      if (player.id === currentPlayer) {
+        const pulse = document.createElement('div');
+        pulse.className = 'pulse';
+        div.appendChild(pulse);
+      }
+
+      playersList.appendChild(div);
+    });
+  }
+
+  function nextTurn() {
+    currentPlayer = (currentPlayer % players.length) + 1;
+    timeLeft = 30;
+    renderCurrentPlayer();
+    renderPlayersList();
+  }
+
+  document.getElementById('next-turn').addEventListener('click', nextTurn);
+
+  renderCurrentPlayer();
+  renderPlayersList();
+</script>
