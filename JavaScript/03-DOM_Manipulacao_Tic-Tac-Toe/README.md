@@ -45,5 +45,13 @@ Este projeto faz parte do meu estudo sobre manipulação do DOM e interatividade
 - [ ] Criar um modo contra o computador (IA simples).
 - [ ] Adaptar para dispositivos móveis com layout responsivo.
 - [ ] Permitir escolha de símbolos personalizados além de “X” e “O”.
+- [ ] Implementar novo layout para exibição dos jogadores.
 
-📌 **Última atualização:** `14/05/2025`
+## 📐 Protótipo de Layout Futuro
+Uma nova interface para exibir as informações dos jogadores já foi prototipada e está disponível no projeto. Esse layout tem como objetivo melhorar a apresentação visual e a experiência do usuário durante a partida.
+
+📁 Arquivo: [`designs/WIP_PlayerLayout.html`](designs/WIP_PlayerLayout.html)
+
+> Este arquivo HTML contém o layout completo com HTML, CSS e JavaScript embutidos. Ainda **não está integrado** ao jogo principal, mas será utilizado como base para uma futura implementação.
+
+📌 **Última atualização:** `29/05/2025`
