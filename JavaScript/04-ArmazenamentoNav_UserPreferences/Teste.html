@@ -23,7 +23,7 @@
             .notification-panel {
                 top: 20px;
                 left: 20px;
-                max-width: 280px;
+                max-width: 100%;
                 padding: 16px;
             }
 
@@ -41,6 +41,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
@@ -65,6 +66,7 @@
             overflow: hidden;
             animation: fadeInUp 0.8s ease-out;
             transition: all 0.4s ease;
+            margin-bottom: 1rem;
         }
 
         body.dark .container {
@@ -155,9 +157,6 @@
         }
 
         .notification-panel {
-            position: fixed;
-            top: 30px;
-            left: 30px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: 16px;
@@ -166,7 +165,8 @@
             border: 1px solid rgba(139, 92, 246, 0.2);
             z-index: 1000;
             transition: all 0.4s ease;
-            max-width: 300px;
+            max-width: 800px;
+            width: 100%;
         }
 
         body.dark .notification-panel {
@@ -177,6 +177,8 @@
 
         .notification-content {
             display: flex;
+            flex-direction: row;
+            justify-content: space-between;
             align-items: center;
             gap: 15px;
         }
@@ -187,6 +189,7 @@
         }
 
         .notification-text h3 {
+            width: 60vh;
             font-size: 1rem;
             font-weight: 600;
             margin: 0 0 4px 0;
@@ -214,6 +217,7 @@
             flex-direction: column;
             align-items: center;
             gap: 8px;
+            margin-right: 1rem;
         }
 
         .switch {
@@ -379,6 +383,22 @@
         </button>
     </div>
 
+    <div class="decorative-element"></div>
+    <div class="decorative-element"></div>
+    
+    <div class="container">
+        <h1>Design Digital Moderno</h1>
+        <div class="content">
+            <p>
+                Bem-vindo ao futuro do <span class="highlight">design digital</span>. Nossa abordagem minimalista combina elegância e funcionalidade, criando experiências visuais que capturam a atenção e transmitem sua mensagem de forma clara e impactante.
+            </p>
+            <br>
+            <p>
+                Cada elemento é cuidadosamente planejado para oferecer uma <span class="highlight">experiência responsiva</span> excepcional, adaptando-se perfeitamente a qualquer dispositivo e mantendo a harmonia visual em todas as telas.
+            </p>
+        </div>
+    </div>
+
     <div class="notification-panel">
         <div class="notification-content">
             <div class="notification-icon">🔔</div>
@@ -393,22 +413,6 @@
                 </label>
                 <span class="toggle-label" id="toggleLabel">Sim</span>
             </div>
-        </div>
-    </div>
-
-    <div class="decorative-element"></div>
-    <div class="decorative-element"></div>
-    
-    <div class="container">
-        <h1>Design Digital Moderno</h1>
-        <div class="content">
-            <p>
-                Bem-vindo ao futuro do <span class="highlight">design digital</span>. Nossa abordagem minimalista combina elegância e funcionalidade, criando experiências visuais que capturam a atenção e transmitem sua mensagem de forma clara e impactante.
-            </p>
-            <br>
-            <p>
-                Cada elemento é cuidadosamente planejado para oferecer uma <span class="highlight">experiência responsiva</span> excepcional, adaptando-se perfeitamente a qualquer dispositivo e mantendo a harmonia visual em todas as telas.
-            </p>
         </div>
     </div>
 
