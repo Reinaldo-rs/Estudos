@@ -6,7 +6,7 @@ Este projeto faz parte do meu estudo sobre **Armazenamento Nativo no Navegador**
 ## 🚀 Funcionalidades
 - 🎨 **Escolha de Tema (Claro ou Escuro)**  
   ⮕ Salvo usando **Local Storage** para persistir entre sessões.
-  
+
 - 🔐 **Login de Sessão Simples (Nome do Usuário)**  
   ⮕ Utiliza **Session Storage**, válido enquanto a aba estiver aberta.
 
@@ -64,4 +64,4 @@ Este projeto faz parte do meu estudo sobre **Armazenamento Nativo no Navegador**
 ## 📐 Protótipo de Layout
 O design atual segue um padrão moderno, minimalista, com tons de roxo e boa legibilidade. As telas foram planejadas para simular uma experiência real de um sistema web responsivo.
 
-📌 **Última atualização:** `30/05/2025`
+📌 **Última atualização:** `03/06/2025`

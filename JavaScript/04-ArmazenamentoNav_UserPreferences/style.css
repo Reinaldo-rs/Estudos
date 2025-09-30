@@ -6,19 +6,30 @@
 
 :root {
     --font-color: #4b5563;
-    --border-color:rgba(139, 92, 246, 0.2);
-    --shadow-color:rgba(102, 126, 234, 0.3);
+    --border-color: rgba(139, 92, 246, 0.2);
+    --shadow-color: rgba(102, 126, 234, 0.3);
     --bg-toggle-color: rgba(255, 255, 255, 0.9);
     --highlight-color: #8b5cf6;
+
     --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
     --gradient-heading: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
     --gradient-decorative: linear-gradient(45deg, rgba(26, 27, 62, 0.979), rgba(45, 27, 105, 0.1));
     --gradient-top-line: linear-gradient(90deg, #8b5cf6, #a855f7, #c084fc);
 }
 
+[data-theme="dark"] {
+    --font-color: #d1d5db;
+    --border-color: rgba(139, 92, 246, 0.3);
+    --shadow-color: rgba(30, 30, 60, 0.5);
+    --gradient-bg: linear-gradient(135deg, #1a1b3e 0%, #2d1b69 100%);
+    --bg-toggle-color: rgba(30, 30, 60, 0.9);
+    --gradient-decorative: linear-gradient(45deg, rgba(80, 30, 150, 0.9), rgba(30, 30, 60, 0.3));
+}
+
 body {
     background: var(--gradient-bg);
-    color: var(--gradient-bg);
+    color: var(--font-color);
     font-family: "Ubuntu", sans-serif;
     /* overflow: hidden; */
 }

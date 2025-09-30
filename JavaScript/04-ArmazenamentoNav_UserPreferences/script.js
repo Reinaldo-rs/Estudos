@@ -1,14 +1,33 @@
 
+function setTheme(theme) {
+  document.querySelector('body').dataset.theme = theme
+}
+setTheme(localStorage.getItem('currentTheme'))
+
+document.getElementById('themeToggle').addEventListener('click', function () {
+    let mainElement = document.querySelector('body')
+    let currentTheme = mainElement.dataset.theme
+
+    currentTheme = (currentTheme === 'dark') ? 'light' : 'dark'
+
+    localStorage.setItem('currentTheme', currentTheme)
+
+    mainElement.dataset.theme = localStorage.getItem('currentTheme')
+
+    toggleIcon = document.querySelector('.toggle-icon')
+
+    currentTheme = (currentTheme === 'dark') ? toggleIcon.textContent = '☀️' : toggleIcon.textContent = '🌙'
+})
 
 
 
 const condicao = false
-if(condicao === true){
-document.addEventListener('DOMContentLoaded', function () {
-    const notificationPanel = document.querySelector('.notification-panel')
+if (condicao === true) {
+    document.addEventListener('DOMContentLoaded', function () {
+        const notificationPanel = document.querySelector('.notification-panel')
 
-    const wellcome = document.createElement('div')
-    wellcome.innerHTML = `
+        const wellcome = document.createElement('div')
+        wellcome.innerHTML = `
         < div class="notification-content" >
             <div class="notification-icon">🔔</div>
             <div class="notification-text">
@@ -25,5 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
         </div >
     `
 
-    notificationPanel.appendChild(wellcome)
-})}
+        notificationPanel.appendChild(wellcome)
+    })
+}
