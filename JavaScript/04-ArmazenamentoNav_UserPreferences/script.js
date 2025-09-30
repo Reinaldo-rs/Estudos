@@ -1,23 +1,70 @@
-
-function setTheme(theme) {
-  document.querySelector('body').dataset.theme = theme
+const THEMES = {
+    DARK: 'dark',
+    LIGHT: 'light'
 }
-setTheme(localStorage.getItem('currentTheme'))
 
-document.getElementById('themeToggle').addEventListener('click', function () {
-    let mainElement = document.querySelector('body')
-    let currentTheme = mainElement.dataset.theme
+const ICONS = {
+    DARK: '☀️',
+    LIGHT: '🌙'
+}
 
-    currentTheme = (currentTheme === 'dark') ? 'light' : 'dark'
+const STORAGE_KEYS = 'currentTheme'
 
-    localStorage.setItem('currentTheme', currentTheme)
+const elements = {
+    body: document.querySelector('body'),
+    toggleIcon: document.querySelector('.toggle-icon'),
+    themeToggle: document.getElementById('themeToggle')
+}
 
-    mainElement.dataset.theme = localStorage.getItem('currentTheme')
+/**
+ * Atualiza o ícone baseado no tema atual
+ * @param {string} theme - Tema atual ('dark' ou 'light')
+ */
+function updateIcon(theme) {
+    if (!elements.toggleIcon) return
 
-    toggleIcon = document.querySelector('.toggle-icon')
+    elements.themeToggle.textContent = theme === THEMES.DARK
+        ? ICONS.DARK
+        : ICONS.LIGHT
+}
 
-    currentTheme = (currentTheme === 'dark') ? toggleIcon.textContent = '☀️' : toggleIcon.textContent = '🌙'
-})
+/**
+ * Aplica o tema no body e atualiza o ícone
+ * @param {string} theme - Tema a ser aplicado
+ */
+function applyTheme(theme){
+    if(!elements.body) return
+
+    const validTheme = theme === THEMES.DARK ? THEMES.DARK : THEMES.LIGHT
+
+    elements.body.dataset.theme = validTheme
+    updateIcon(validTheme)
+}
+
+/**
+ * Alterna entre os temas
+ */
+function toggleTheme(){
+    const currentTheme = elements.body?.dataset.theme || THEMES.LIGHT
+    const newTheme = currentTheme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK
+
+    localStorage.setItem(STORAGE_KEYS, newTheme)
+    applyTheme(newTheme)
+}
+
+function initTheme(){
+    const savedTheme = localStorage.getItem(STORAGE_KEYS) || THEMES.LIGHT
+    applyTheme(savedTheme)
+}
+
+if(elements.themeToggle){
+    elements.themeToggle.addEventListener('click', toggleTheme)
+}
+
+initTheme()
+
+
+
 
 
 
