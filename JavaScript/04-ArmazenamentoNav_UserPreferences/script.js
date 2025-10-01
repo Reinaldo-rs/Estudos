@@ -32,8 +32,8 @@ function updateIcon(theme) {
  * Aplica o tema no body e atualiza o ícone
  * @param {string} theme - Tema a ser aplicado
  */
-function applyTheme(theme){
-    if(!elements.body) return
+function applyTheme(theme) {
+    if (!elements.body) return
 
     const validTheme = theme === THEMES.DARK ? THEMES.DARK : THEMES.LIGHT
 
@@ -44,7 +44,7 @@ function applyTheme(theme){
 /**
  * Alterna entre os temas
  */
-function toggleTheme(){
+function toggleTheme() {
     const currentTheme = elements.body?.dataset.theme || THEMES.LIGHT
     const newTheme = currentTheme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK
 
@@ -52,18 +52,53 @@ function toggleTheme(){
     applyTheme(newTheme)
 }
 
-function initTheme(){
+function initTheme() {
     const savedTheme = localStorage.getItem(STORAGE_KEYS) || THEMES.LIGHT
     applyTheme(savedTheme)
 }
 
-if(elements.themeToggle){
+if (elements.themeToggle) {
     elements.themeToggle.addEventListener('click', toggleTheme)
 }
 
 initTheme()
 
 
+
+const loginBtn = document.getElementById('loginBtn');
+const loginModal = document.getElementById('loginModal');
+const displayUserName = document.getElementById('displayUserName');
+const userWelcome = document.getElementById('userWelcome');
+const userNameInput = document.getElementById('userName');
+
+let currentUser = null;
+
+// Login ao clicar no botão
+loginBtn.addEventListener('click', () => {
+    const userName = userNameInput.value.trim();
+
+    if (userName) {
+        currentUser = userName;
+        displayUserName.textContent = userName;
+
+        // Fechar modal
+        loginModal.classList.add('hidden');
+
+        // Mostrar mensagem de boas-vindas
+        setTimeout(() => {
+            userWelcome.classList.add('show');
+        }, 300);
+
+        console.log(`✅ Usuário logado: ${userName}`);
+    } else {
+        // Animação de shake se o campo estiver vazio
+        userNameInput.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            userNameInput.style.animation = '';
+        }, 500);
+        userNameInput.focus();
+    }
+});
 
 
 
