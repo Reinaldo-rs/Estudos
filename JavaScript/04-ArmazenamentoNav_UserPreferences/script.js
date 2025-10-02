@@ -8,12 +8,21 @@ const ICONS = {
     LIGHT: '🌙'
 }
 
-const STORAGE_KEYS = 'currentTheme'
+const STORAGE_KEYS = {
+    currentTheme: 'currentTheme',
+    currentUser: 'currentUser'
+}
 
 const elements = {
     body: document.querySelector('body'),
     toggleIcon: document.querySelector('.toggle-icon'),
-    themeToggle: document.getElementById('themeToggle')
+    themeToggle: document.getElementById('themeToggle'),
+    loginBtn: document.getElementById('loginBtn'),
+    loginModal: document.getElementById('loginModal'),
+    displayUserName: document.getElementById('displayUserName'),
+    userWelcome: document.getElementById('userWelcome'),
+    userNameInput: document.getElementById('userName'),
+    userName: document.getElementById('user-name')
 }
 
 /**
@@ -35,7 +44,9 @@ function updateIcon(theme) {
 function applyTheme(theme) {
     if (!elements.body) return
 
-    const validTheme = theme === THEMES.DARK ? THEMES.DARK : THEMES.LIGHT
+    const validTheme = theme === THEMES.DARK
+        ? THEMES.DARK
+        : THEMES.LIGHT
 
     elements.body.dataset.theme = validTheme
     updateIcon(validTheme)
@@ -46,14 +57,16 @@ function applyTheme(theme) {
  */
 function toggleTheme() {
     const currentTheme = elements.body?.dataset.theme || THEMES.LIGHT
-    const newTheme = currentTheme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK
+    const newTheme = currentTheme === THEMES.DARK
+        ? THEMES.LIGHT
+        : THEMES.DARK
 
-    localStorage.setItem(STORAGE_KEYS, newTheme)
+    localStorage.setItem(STORAGE_KEYS.currentTheme, newTheme)
     applyTheme(newTheme)
 }
 
 function initTheme() {
-    const savedTheme = localStorage.getItem(STORAGE_KEYS) || THEMES.LIGHT
+    const savedTheme = localStorage.getItem(STORAGE_KEYS.currentTheme) || THEMES.LIGHT
     applyTheme(savedTheme)
 }
 
@@ -64,41 +77,70 @@ if (elements.themeToggle) {
 initTheme()
 
 
+function applyUser(user) {
+    if (user) closeModal()
+    elements.userName.textContent = user
+    elements.displayUserName.textContent = user
+    console.log(user + ' esse é o user')
+}
 
-const loginBtn = document.getElementById('loginBtn');
-const loginModal = document.getElementById('loginModal');
-const displayUserName = document.getElementById('displayUserName');
-const userWelcome = document.getElementById('userWelcome');
-const userNameInput = document.getElementById('userName');
-
-let currentUser = null;
-
-// Login ao clicar no botão
-loginBtn.addEventListener('click', () => {
-    const userName = userNameInput.value.trim();
-
-    if (userName) {
-        currentUser = userName;
-        displayUserName.textContent = userName;
-
-        // Fechar modal
-        loginModal.classList.add('hidden');
+function closeModal(){
+    // Fechar modal
+        elements.loginModal.classList.add('hidden')
 
         // Mostrar mensagem de boas-vindas
         setTimeout(() => {
-            userWelcome.classList.add('show');
-        }, 300);
+            elements.userWelcome.classList.add('show')
+        }, 300)
+}
 
-        console.log(`✅ Usuário logado: ${userName}`);
+/**
+ * Logar usando usuário
+ */
+function loginUser() {
+    
+    const userName = elements.userNameInput.value.trim() // verificar essa entrada
+    
+    if (userName) {
+        elements.displayUserName.textContent = userName
+        sessionStorage.setItem(STORAGE_KEYS.currentUser, userName)
+        elements.userName.textContent = userName
+        closeModal()
     } else {
         // Animação de shake se o campo estiver vazio
-        userNameInput.style.animation = 'shake 0.5s';
+        elements.userNameInput.classList.add('shake')
         setTimeout(() => {
-            userNameInput.style.animation = '';
-        }, 500);
-        userNameInput.focus();
+            elements.userNameInput.classList.remove('shake')
+        }, 500)
+        elements.userNameInput.focus()
     }
-});
+}
+
+function initUser() {
+    const savedUser = sessionStorage.getItem(STORAGE_KEYS.currentUser) || null
+    console.log(savedUser + ' User salvo')
+    applyUser(savedUser)
+}
+
+initUser()
+
+// Login ao clicar no botão
+if (elements.loginBtn) {
+    elements.loginBtn.addEventListener('click', loginUser)
+}
+
+// Login ao pressionar Enter
+elements.userNameInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        elements.loginBtn.click()
+    }
+})
+
+// Focar no input quando o modal abrir
+setTimeout(() => {
+    elements.userNameInput.focus()
+}, 100)
+
 
 
 

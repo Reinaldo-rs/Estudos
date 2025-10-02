@@ -64,4 +64,4 @@ Este projeto faz parte do meu estudo sobre **Armazenamento Nativo no Navegador**
 ## 📐 Protótipo de Layout
 O design atual segue um padrão moderno, minimalista, com tons de roxo e boa legibilidade. As telas foram planejadas para simular uma experiência real de um sistema web responsivo.
 
-📌 **Última atualização:** `03/06/2025`
+📌 **Última atualização:** `02/10/2025`

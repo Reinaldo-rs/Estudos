@@ -202,7 +202,7 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--gradient-decorative);
     backdrop-filter: blur(8px);
     opacity: 1;
     visibility: visible;
@@ -219,7 +219,7 @@ h2 {
 }
 
 .modal-content {
-    background: white;
+    background: var(--bg-toggle-color);
     backdrop-filter: blur(20px);
     border-radius: 20px;
     padding: 40px;
@@ -273,7 +273,7 @@ h2 {
     display: block;
     font-size: 1rem;
     font-weight: 600;
-    color: #374151;
+    color: var(--font-color);
     margin-bottom: 12px;
     transition: color 0.4s ease;
 }
@@ -282,19 +282,19 @@ h2 {
     width: 100%;
     padding: 14px 18px;
     font-size: 1rem;
-    border: 2px solid rgba(139, 92, 246, 0.2);
+    border: 2px solid var(--border-color);
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.8);
-    color: #374151;
+    background: white;
+    color: black;
     transition: all 0.3s ease;
     font-family: inherit;
 }
 
 .modal-body input[type="text"]:focus {
     outline: none;
-    border-color: #8b5cf6;
+    border-color: var(--border-color);
     background: white;
-    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+    box-shadow: 0 0 0 4px var(--shadow-color);
     caret-color: auto;
 }
 
@@ -309,43 +309,37 @@ h2 {
     padding: 14px 40px;
     font-size: 1rem;
     font-weight: 600;
-    color: white;
-    background: linear-gradient(135deg, #8B5CF6, #A855F7);
+    color: var(--font-color);
+    background: var(--gradient-heading);
     border: none;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 8px 16px var(--shadow-color);
     font-family: inherit;
 }
 
 .loginBtn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(139, 92, 246, 0.4);
-    background: linear-gradient(135deg, #7c3aed, #9333ea);
+    box-shadow: 0 12px 24px var(--shadow-color);
+    background: var(--gradient-decorative);
 }
 
 .loginBtn:active {
     transform: translateY(0);
-    box-shadow: 0 4px 8px rgba(139, 92, 246, 0.3);
-}
-
-.user-welcome {
-    top: 90px;
-    left: 20px;
-    padding: 10px 16px;
+    box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .user-welcome {
     position: fixed;
     top: 110px;
-    left: 30px;
-    background: rgba(255, 255, 255, 0.95);
+    left: 110px;
+    background: var(--bg-toggle-color);
     backdrop-filter: blur(20px);
     border-radius: 12px;
     padding: 12px 20px;
-    box-shadow: 0 8px 16px rgba(139, 92, 246, 0.2);
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    box-shadow: 0 8px 16px var(--shadow-color);
+    border: 1px solid var(--border-color);
     z-index: 1000;
     display: none;
     align-items: center;
@@ -360,6 +354,159 @@ h2 {
 
 .user-welcome-text {
     font-size: 0.95rem;
-    color: #374151;
+    color: var(--font-color);
     font-weight: 500;
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-5px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+/* ----------------------------------------------------------------- */
+/* Verificar codigo abaixo referente ao painel de notificaçao */
+
+.notification-panel {
+    top: 20px;
+    left: 20px;
+    max-width: 100%;
+    padding: 16px;
+}
+
+.notification-content {
+    gap: 12px;
+}
+
+.notification-icon {
+    font-size: 1.2rem;
+}
+
+.notification-panel {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 16px 32px rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    z-index: 1000;
+    transition: all 0.4s ease;
+    max-width: 800px;
+    width: 100%;
+}
+
+.notification-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.notification-icon {
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+.notification-text h3 {
+    width: 60vh;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #374151;
+    transition: color 0.4s ease;
+}
+
+.notification-text p {
+    font-size: 0.875rem;
+    margin: 0;
+    color: #6b7280;
+    transition: color 0.4s ease;
+}
+
+.notification-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-right: 1rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    transition: 0.3s;
+    border-radius: 24px;
+    box-shadow: 0 4px 8px rgba(139, 92, 246, 0.3);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+input:not(:checked)+.slider {
+    background: #e5e7eb;
+}
+
+body.dark input:not(:checked)+.slider {
+    background: #4b5563;
+}
+
+.toggle-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #8b5cf6;
+    transition: color 0.3s ease;
 }

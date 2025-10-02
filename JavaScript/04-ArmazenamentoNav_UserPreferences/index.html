@@ -21,9 +21,7 @@
                 <span class="toggle-icon">🌙</span>
             </button>
         </div>
-
-        <div class="notification-panel"></div>
-
+    
         <div class="decorative-element"></div>
 
         <div class="container">
@@ -31,7 +29,7 @@
             <h2>Sistema de Preferências de Usuário no Navegador</h2>
             <div class="content">
                 <p>
-                    🎉 Olá, <span class="user-name">João</span>! Boas-vindas! <br>
+                    🎉 Olá, <span class="user-name" id="user-name"></span>! Boas-vindas! <br>
                     Este é o projeto UserPreferences, desenvolvido para demonstrar na prática como funciona o
                     armazenamento nativo no navegador utilizando Local Storage, Session Storage e Cookies.
                 </p>
@@ -69,6 +67,23 @@
         <div class="user-welcome" id="userWelcome">
             <span class="user-welcome-text">👋 Olá, <span class="user-name" id="displayUserName"></span>!</span>
         </div>
+
+        <div class="notification-panel">
+        <div class="notification-content">
+            <div class="notification-icon">🔔</div>
+            <div class="notification-text">
+                <h3>Notificações</h3>
+                <p>Deseja continuar recebendo notificações?</p>
+            </div>
+            <div class="notification-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="notificationToggle" checked>
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label" id="toggleLabel">Sim</span>
+            </div>
+        </div>
+    </div>
     </main>
     <footer></footer>
 
