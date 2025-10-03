@@ -22,7 +22,10 @@ const elements = {
     displayUserName: document.getElementById('displayUserName'),
     userWelcome: document.getElementById('userWelcome'),
     userNameInput: document.getElementById('userName'),
-    userName: document.getElementById('user-name')
+    userName: document.getElementById('user-name'),
+    notificationOverlay: document.querySelector('.notification-overlay'),
+    notificationPanel: document.querySelector('.notification-panel'),
+    confirmBtn: document.getElementById('confirm-btn'),
 }
 
 /**
@@ -81,31 +84,31 @@ function applyUser(user) {
     if (user) closeModal()
     elements.userName.textContent = user
     elements.displayUserName.textContent = user
-    console.log(user + ' esse é o user')
 }
 
-function closeModal(){
+function closeModal() {
     // Fechar modal
-        elements.loginModal.classList.add('hidden')
+    elements.loginModal.classList.add('hidden')
 
-        // Mostrar mensagem de boas-vindas
-        setTimeout(() => {
-            elements.userWelcome.classList.add('show')
-        }, 300)
+    // Mostrar mensagem de boas-vindas
+    setTimeout(() => {
+        elements.userWelcome.classList.add('show')
+    }, 300)
 }
 
 /**
  * Logar usando usuário
  */
 function loginUser() {
-    
+
     const userName = elements.userNameInput.value.trim() // verificar essa entrada
-    
+
     if (userName) {
         elements.displayUserName.textContent = userName
         sessionStorage.setItem(STORAGE_KEYS.currentUser, userName)
         elements.userName.textContent = userName
         closeModal()
+        elements.notificationOverlay.classList.add('show')
     } else {
         // Animação de shake se o campo estiver vazio
         elements.userNameInput.classList.add('shake')
@@ -118,7 +121,6 @@ function loginUser() {
 
 function initUser() {
     const savedUser = sessionStorage.getItem(STORAGE_KEYS.currentUser) || null
-    console.log(savedUser + ' User salvo')
     applyUser(savedUser)
 }
 
@@ -145,29 +147,29 @@ setTimeout(() => {
 
 
 
-const condicao = false
-if (condicao === true) {
-    document.addEventListener('DOMContentLoaded', function () {
-        const notificationPanel = document.querySelector('.notification-panel')
+// Sistema de notificações
+const notificationToggle = document.getElementById('notificationToggle')
+const toggleLabel = document.getElementById('toggleLabel')
 
-        const wellcome = document.createElement('div')
-        wellcome.innerHTML = `
-        < div class="notification-content" >
-            <div class="notification-icon">🔔</div>
-            <div class="notification-text">
-                <h3>Notificações</h3>
-                <p>Deseja recebendo boas vindas novamente?</p>
-            </div>
-            <div class="notification-toggle">
-                <label class="switch">
-                    <input type="checkbox" id="notificationToggle" checked>
-                    <span class="slider"></span>
-                </label>
-                <span class="toggle-label" id="toggleLabel">Sim</span>
-            </div>
-        </div >
-    `
+// Estado das notificações (inicialmente ativado)
+let notificationsEnabled = true
 
-        notificationPanel.appendChild(wellcome)
-    })
-}
+notificationToggle.addEventListener('change', () => {
+    notificationsEnabled = notificationToggle.checked
+
+    if (notificationsEnabled) {
+        toggleLabel.textContent = 'Sim'
+        toggleLabel.style.color = '#8b5cf6'
+    } else {
+        toggleLabel.textContent = 'Não'
+        toggleLabel.style.color = '#ef4444'
+    }
+})
+
+elements.confirmBtn.addEventListener('click', () => {
+    if (toggleLabel.textContent === 'Sim') {
+     elements.notificationPanel.classList.remove('show') //adicona um load, para saber se vai carregar ou nao na proxima
+    } else {
+    elements.notificationPanel.classList.add('show')
+    }
+})

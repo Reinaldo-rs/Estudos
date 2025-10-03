@@ -196,7 +196,8 @@ h2 {
     }
 }
 
-.modal-overlay {
+
+.modal-overlay, .notification-overlay.show {
     position: fixed;
     top: 0;
     left: 0;
@@ -298,13 +299,13 @@ h2 {
     caret-color: auto;
 }
 
-.modal-btn {
+.modal-btn, .notification-btn {
     display: flex;
     justify-content: flex-end;
     caret-color: transparent;
 }
 
-.loginBtn {
+.loginBtn, .confirm-btn {
     width: 100%;
     padding: 14px 40px;
     font-size: 1rem;
@@ -319,21 +320,21 @@ h2 {
     font-family: inherit;
 }
 
-.loginBtn:hover {
+.loginBtn:hover, .confirm-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 24px var(--shadow-color);
     background: var(--gradient-decorative);
 }
 
-.loginBtn:active {
+.loginBtn:active, .confirm-btn:active {
     transform: translateY(0);
     box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .user-welcome {
-    position: fixed;
-    top: 110px;
-    left: 110px;
+    position: absolute;
+    top: 40px;
+    left: 40px;
     background: var(--bg-toggle-color);
     backdrop-filter: blur(20px);
     border-radius: 12px;
@@ -341,7 +342,9 @@ h2 {
     box-shadow: 0 8px 16px var(--shadow-color);
     border: 1px solid var(--border-color);
     z-index: 1000;
-    display: none;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
     align-items: center;
     gap: 10px;
     transition: all 0.4s ease;
@@ -349,7 +352,8 @@ h2 {
 }
 
 .user-welcome.show {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
 }
 
 .user-welcome-text {
@@ -389,21 +393,6 @@ h2 {
 /* Verificar codigo abaixo referente ao painel de notificaçao */
 
 .notification-panel {
-    top: 20px;
-    left: 20px;
-    max-width: 100%;
-    padding: 16px;
-}
-
-.notification-content {
-    gap: 12px;
-}
-
-.notification-icon {
-    font-size: 1.2rem;
-}
-
-.notification-panel {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border-radius: 16px;
@@ -412,8 +401,27 @@ h2 {
     border: 1px solid rgba(139, 92, 246, 0.2);
     z-index: 1000;
     transition: all 0.4s ease;
-    max-width: 800px;
+    max-width: 960px;
     width: 100%;
+    display: none;
+    flex-direction: column;
+}
+
+.confirm-btn {
+    width: 100px;
+    margin-top: 10px;
+    padding: 14px 10px;
+}
+
+.notification-btn.hidden {
+    display: none;
+}
+
+.notification-panel.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .notification-content {

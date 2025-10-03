@@ -21,8 +21,12 @@
                 <span class="toggle-icon">🌙</span>
             </button>
         </div>
-    
+
         <div class="decorative-element"></div>
+
+        <div class="user-welcome" id="userWelcome">
+            <span class="user-welcome-text">👋 Olá, <span class="user-name" id="displayUserName"></span>!</span>
+        </div>
 
         <div class="container">
             <h1>User Preferences</h1>
@@ -56,7 +60,8 @@
                 </div>
                 <div class="modal-body">
                     <label for="userName">Insira seu nome:</label>
-                    <input type="text" name="userName" id="userName" placeholder="Insira seu nome aqui" autocomplete="off">
+                    <input type="text" name="userName" id="userName" placeholder="Insira seu nome aqui"
+                        autocomplete="off">
                 </div>
                 <div class="modal-btn">
                     <button class="loginBtn" id="loginBtn">Entrar</button>
@@ -64,26 +69,27 @@
             </div>
         </div>
 
-        <div class="user-welcome" id="userWelcome">
-            <span class="user-welcome-text">👋 Olá, <span class="user-name" id="displayUserName"></span>!</span>
-        </div>
-
-        <div class="notification-panel">
-        <div class="notification-content">
-            <div class="notification-icon">🔔</div>
-            <div class="notification-text">
-                <h3>Notificações</h3>
-                <p>Deseja continuar recebendo notificações?</p>
+        <div class="notification-overlay">
+            <div class="notification-panel show">
+                <div class="notification-content">
+                    <div class="notification-icon">🔔</div>
+                    <div class="notification-text">
+                        <h3>Notificações</h3>
+                        <p>Deseja continuar recebendo notificações?</p>
+                    </div>
+                    <div class="notification-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="notificationToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span class="toggle-label" id="toggleLabel">Sim</span>
+                    </div>
+                </div>
+                <div class="notification-btn">
+                    <button class="confirm-btn" id="confirm-btn">Confirmar</button>
+                </div>
             </div>
-            <div class="notification-toggle">
-                <label class="switch">
-                    <input type="checkbox" id="notificationToggle" checked>
-                    <span class="slider"></span>
-                </label>
-                <span class="toggle-label" id="toggleLabel">Sim</span>
-            </div>
         </div>
-    </div>
     </main>
     <footer></footer>
 
