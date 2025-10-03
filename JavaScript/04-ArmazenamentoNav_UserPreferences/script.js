@@ -26,6 +26,7 @@ const elements = {
     notificationOverlay: document.querySelector('.notification-overlay'),
     notificationPanel: document.querySelector('.notification-panel'),
     confirmBtn: document.getElementById('confirm-btn'),
+    toggleLabel: document.getElementById('toggleLabel'),
 }
 
 /**
@@ -149,7 +150,6 @@ setTimeout(() => {
 
 // Sistema de notificações
 const notificationToggle = document.getElementById('notificationToggle')
-const toggleLabel = document.getElementById('toggleLabel')
 
 // Estado das notificações (inicialmente ativado)
 let notificationsEnabled = true
@@ -158,18 +158,37 @@ notificationToggle.addEventListener('change', () => {
     notificationsEnabled = notificationToggle.checked
 
     if (notificationsEnabled) {
-        toggleLabel.textContent = 'Sim'
-        toggleLabel.style.color = '#8b5cf6'
+        elements.toggleLabel.textContent = 'Sim'
+        elements.toggleLabel.style.color = '#8b5cf6'
     } else {
-        toggleLabel.textContent = 'Não'
-        toggleLabel.style.color = '#ef4444'
+        elements.toggleLabel.textContent = 'Não'
+        elements.toggleLabel.style.color = '#ef4444'
     }
 })
 
-elements.confirmBtn.addEventListener('click', () => {
-    if (toggleLabel.textContent === 'Sim') {
-     elements.notificationPanel.classList.remove('show') //adicona um load, para saber se vai carregar ou nao na proxima
+initNotificationState()
+
+function initNotificationState() {
+    notificationLoaded = elements.notificationPanel.classList.contains('load')
+    if (notificationLoaded) {
+        elements.notificationOverlay.classList.add('show')
+        elements.notificationPanel.classList.add('show')
+        elements.toggleLabel.textContent = 'Sim'
+        elements.toggleLabel.style.color = '#8b5cf6'
     } else {
-    elements.notificationPanel.classList.add('show')
+        elements.notificationOverlay.classList.remove('show')
+        elements.notificationPanel.classList.add('show')
+        elements.toggleLabel.textContent = 'Não'
+        elements.toggleLabel.style.color = '#ef4444'
+    }
+}
+
+elements.confirmBtn.addEventListener('click', () => {
+    elements.notificationOverlay.classList.remove('show')
+    if (elements.toggleLabel.textContent === 'Sim') {
+     elements.notificationPanel.classList.add('load')
+     elements.notificationPanel.classList.remove('show')
+    } else {
+    elements.notificationPanel.classList.remove('load')
     }
 })
