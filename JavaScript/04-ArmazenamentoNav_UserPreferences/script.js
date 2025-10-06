@@ -27,6 +27,7 @@ const elements = {
     notificationPanel: document.querySelector('.notification-panel'),
     confirmBtn: document.getElementById('confirm-btn'),
     toggleLabel: document.getElementById('toggleLabel'),
+    notificationToggle: document.getElementById('notificationToggle'),
 }
 
 /**
@@ -145,26 +146,23 @@ setTimeout(() => {
 }, 100)
 
 
-
-
-
-// Sistema de notificações
-const notificationToggle = document.getElementById('notificationToggle')
-
 // Estado das notificações (inicialmente ativado)
-let notificationsEnabled = true
-
-notificationToggle.addEventListener('change', () => {
-    notificationsEnabled = notificationToggle.checked
+function setNotification () {
+    let notificationsEnabled = true
+    notificationsEnabled = elements.notificationToggle.checked
 
     if (notificationsEnabled) {
         elements.toggleLabel.textContent = 'Sim'
         elements.toggleLabel.style.color = '#8b5cf6'
+        document.cookie = "notifications=enabled; max-age=31536000; path=/"; // 1 ano
     } else {
         elements.toggleLabel.textContent = 'Não'
         elements.toggleLabel.style.color = '#ef4444'
+        document.cookie = "notifications=disabled; max-age=31536000; path=/"; // 1 ano
     }
-})
+}
+
+elements.notificationToggle.addEventListener('change', setNotification)
 
 initNotificationState()
 
@@ -173,13 +171,11 @@ function initNotificationState() {
     if (notificationLoaded) {
         elements.notificationOverlay.classList.add('show')
         elements.notificationPanel.classList.add('show')
-        elements.toggleLabel.textContent = 'Sim'
-        elements.toggleLabel.style.color = '#8b5cf6'
+        setNotification ()
     } else {
         elements.notificationOverlay.classList.remove('show')
         elements.notificationPanel.classList.add('show')
-        elements.toggleLabel.textContent = 'Não'
-        elements.toggleLabel.style.color = '#ef4444'
+        setNotification ()
     }
 }
 
