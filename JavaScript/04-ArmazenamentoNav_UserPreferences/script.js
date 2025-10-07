@@ -9,8 +9,15 @@ const ICONS = {
 }
 
 const STORAGE_KEYS = {
+  local: {
     currentTheme: 'currentTheme',
-    currentUser: 'currentUser'
+  },
+  session: {
+    currentUser: 'currentUser',
+  },
+  cookie: {
+    notifications: 'notifications',
+  },
 }
 
 const elements = {
@@ -66,12 +73,12 @@ function toggleTheme() {
         ? THEMES.LIGHT
         : THEMES.DARK
 
-    localStorage.setItem(STORAGE_KEYS.currentTheme, newTheme)
+    localStorage.setItem(STORAGE_KEYS.local.currentTheme, newTheme)
     applyTheme(newTheme)
 }
 
 function initTheme() {
-    const savedTheme = localStorage.getItem(STORAGE_KEYS.currentTheme) || THEMES.LIGHT
+    const savedTheme = localStorage.getItem(STORAGE_KEYS.local.currentTheme) || THEMES.LIGHT
     applyTheme(savedTheme)
 }
 
@@ -107,10 +114,20 @@ function loginUser() {
 
     if (userName) {
         elements.displayUserName.textContent = userName
-        sessionStorage.setItem(STORAGE_KEYS.currentUser, userName)
+        sessionStorage.setItem(STORAGE_KEYS.session.currentUser, userName)
         elements.userName.textContent = userName
         closeModal()
-        elements.notificationOverlay.classList.add('show')
+
+        if(!getCookie(STORAGE_KEYS.cookie.notifications)) {
+        elements.notificationOverlay.classList.add('show') // exibir notificações como modal
+        console.log("chegou aqui - 1")
+        } else {
+            getCookie(STORAGE_KEYS.cookie.notifications) === 'Sim'
+            ? elements.notificationOverlay.classList.add('show')
+            : elements.notificationOverlay.classList.remove('show')
+
+            console.log("chegou aqui - 2")
+        }
     } else {
         // Animação de shake se o campo estiver vazio
         elements.userNameInput.classList.add('shake')
@@ -122,7 +139,7 @@ function loginUser() {
 }
 
 function initUser() {
-    const savedUser = sessionStorage.getItem(STORAGE_KEYS.currentUser) || null
+    const savedUser = sessionStorage.getItem(STORAGE_KEYS.session.currentUser) || null
     applyUser(savedUser)
 }
 
@@ -145,6 +162,24 @@ setTimeout(() => {
     elements.userNameInput.focus()
 }, 100)
 
+// ------------NOTIFICAÇAO--------------
+
+// Função para obter o valor de um cookie
+function getCookie(name) {
+  const cookieString = document.cookie || '';
+  const cookies = cookieString.split(';').map(c => c.trim());
+  const token = name + '=';
+  const pair = cookies.find(c => c.startsWith(token));
+  return pair ? decodeURIComponent(pair.slice(token.length)) : null;
+}
+
+// Função para definir um cookie (com expiração e path)
+function setCookie(name, value, days = 7) {
+  const expires = new Date();
+  expires.setDate(expires.getDate() + days);
+  document.cookie =
+    `${name}=${encodeURIComponent(value)}; expires=${expires.toUTCString()}; path=/`;
+}
 
 // Estado das notificações (inicialmente ativado)
 function setNotification () {
@@ -154,11 +189,13 @@ function setNotification () {
     if (notificationsEnabled) {
         elements.toggleLabel.textContent = 'Sim'
         elements.toggleLabel.style.color = '#8b5cf6'
-        document.cookie = "notifications=enabled; max-age=31536000; path=/"; // 1 ano
+        setCookie(STORAGE_KEYS.cookie.notifications, 'Sim')
+        // document.cookie = "notifications=enabled; max-age=31536000; path=/"; // 1 ano
     } else {
         elements.toggleLabel.textContent = 'Não'
         elements.toggleLabel.style.color = '#ef4444'
-        document.cookie = "notifications=disabled; max-age=31536000; path=/"; // 1 ano
+        setCookie(STORAGE_KEYS.cookie.notifications, 'Nao')
+        // document.cookie = "notifications=disabled; max-age=31536000; path=/"; // 1 ano
     }
 }
 
@@ -171,10 +208,12 @@ function initNotificationState() {
     if (notificationLoaded) {
         elements.notificationOverlay.classList.add('show')
         elements.notificationPanel.classList.add('show')
+        setCookie(STORAGE_KEYS.cookie.notifications, 'Não')
         setNotification ()
     } else {
         elements.notificationOverlay.classList.remove('show')
         elements.notificationPanel.classList.add('show')
+        setCookie(STORAGE_KEYS.cookie.notifications, 'Sim')
         setNotification ()
     }
 }
