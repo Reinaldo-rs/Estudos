@@ -18,6 +18,53 @@ Este projeto faz parte do meu estudo sobre **Armazenamento Nativo no Navegador**
   - O **login** some ao fechar a aba (Session Storage).
   - O **popup** respeita a escolha anterior (Cookies).
 
+---
+
+## 🔄 Fluxo da Exibição de Notificação
+
+Este fluxograma representa a lógica de exibição e persistência da notificação com base no estado do **checkbox** e no valor armazenado nos **cookies**.
+
+- Quando o usuário **marca** o checkbox (ativa):  
+  - O cookie é salvo como `sim`;  
+  - A notificação **some da tela logada**;  
+  - No próximo reload, **a notificação volta a aparecer**.
+
+- Quando o usuário **desmarca** o checkbox (desativa):  
+  - O cookie é salvo como `nao`;  
+  - A notificação **permanece visível** na tela logada;  
+  - No próximo reload, **a notificação não é exibida**.
+
+### 📊 Preview Fluxograma
+<img src="./notificationFlow.png" alt="Preview do Fluxo" width="250"/>
+
+
+### 🧭 Diagrama Mermaid
+
+```mermaid
+flowchart TD
+    A[Início] --> B[Carregar Página]
+    B --> C{Cookie existe?}
+    C -->|Não| D[Exibe notificação]
+    C -->|Sim| E{Valor do cookie}
+    E -->|sim| D[Exibe notificação]
+    E -->|nao| F[Não exibe notificação]
+
+    D --> G[Usuário interage com checkbox]
+    F --> G
+
+    G --> H{Checkbox está marcado?}
+    H -->|Sim| I[Salvar cookie como sim]
+    I --> J[Remover notificação da tela logada]
+    J --> K[No próximo reload: Exibir notificação]
+
+    H -->|Não| L[Salvar cookie como nao]
+    L --> M[Manter notificação na tela logada]
+    M --> N[No próximo reload: Não exibir notificação]
+
+    K --> O[Fim]
+    N --> O 
+```
+
 ## 🏗️ Tecnologias Utilizadas
 - HTML
 - CSS (com foco em tons de roxo e tema claro/escuro)
