@@ -9,15 +9,20 @@ const ICONS = {
 }
 
 const STORAGE_KEYS = {
-  local: {
-    currentTheme: 'currentTheme',
-  },
-  session: {
-    currentUser: 'currentUser',
-  },
-  cookie: {
-    notifications: 'notifications',
-  },
+    local: {
+        currentTheme: 'currentTheme',
+    },
+    session: {
+        currentUser: 'currentUser',
+    },
+    cookie: {
+        notifications: 'notifications',
+    },
+}
+
+const POPUP_RESPONSE = {
+    YES: 'Sim',
+    NO: 'Não'
 }
 
 const elements = {
@@ -35,6 +40,7 @@ const elements = {
     confirmBtn: document.getElementById('confirm-btn'),
     toggleLabel: document.getElementById('toggleLabel'),
     notificationToggle: document.getElementById('notificationToggle'),
+    notificationBtn: document.querySelector('.notification-btn')
 }
 
 /**
@@ -117,17 +123,7 @@ function loginUser() {
         sessionStorage.setItem(STORAGE_KEYS.session.currentUser, userName)
         elements.userName.textContent = userName
         closeModal()
-
-        if(!getCookie(STORAGE_KEYS.cookie.notifications)) {
-        elements.notificationOverlay.classList.add('show') // exibir notificações como modal
-        console.log("chegou aqui - 1")
-        } else {
-            getCookie(STORAGE_KEYS.cookie.notifications) === 'Sim'
-            ? elements.notificationOverlay.classList.add('show')
-            : elements.notificationOverlay.classList.remove('show')
-
-            console.log("chegou aqui - 2")
-        }
+        showPopup(elements.toggleLabel.textContent)
     } else {
         // Animação de shake se o campo estiver vazio
         elements.userNameInput.classList.add('shake')
@@ -164,66 +160,120 @@ setTimeout(() => {
 
 // ------------NOTIFICAÇAO--------------
 
+// Função para definir um cookie com suporte a caracteres especiais e acentos
+function setCookie(name, value, days = 7) {
+    const expires = new Date()
+    expires.setDate(expires.getDate() + days)
+
+    // Converte string para bytes UTF-8 e depois para Base64
+    const encoder = new TextEncoder()
+    const bytes = encoder.encode(value)
+    const base64 = btoa(String.fromCharCode(...bytes))
+
+    document.cookie = `${name}=${base64}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`
+}
+
 // Função para obter o valor de um cookie
 function getCookie(name) {
-  const cookieString = document.cookie || '';
-  const cookies = cookieString.split(';').map(c => c.trim());
-  const token = name + '=';
-  const pair = cookies.find(c => c.startsWith(token));
-  return pair ? decodeURIComponent(pair.slice(token.length)) : null;
-}
+    const cookieString = document.cookie || ''
+    const cookies = cookieString.split(';').map(c => c.trim())
+    const token = name + '='
+    const pair = cookies.find(c => c.startsWith(token))
 
-// Função para definir um cookie (com expiração e path)
-function setCookie(name, value, days = 7) {
-  const expires = new Date();
-  expires.setDate(expires.getDate() + days);
-  document.cookie =
-    `${name}=${encodeURIComponent(value)}; expires=${expires.toUTCString()}; path=/`;
-}
+    if (!pair) return null
 
-// Estado das notificações (inicialmente ativado)
-function setNotification () {
-    let notificationsEnabled = true
-    notificationsEnabled = elements.notificationToggle.checked
-
-    if (notificationsEnabled) {
-        elements.toggleLabel.textContent = 'Sim'
-        elements.toggleLabel.style.color = '#8b5cf6'
-        setCookie(STORAGE_KEYS.cookie.notifications, 'Sim')
-        // document.cookie = "notifications=enabled; max-age=31536000; path=/"; // 1 ano
-    } else {
-        elements.toggleLabel.textContent = 'Não'
-        elements.toggleLabel.style.color = '#ef4444'
-        setCookie(STORAGE_KEYS.cookie.notifications, 'Nao')
-        // document.cookie = "notifications=disabled; max-age=31536000; path=/"; // 1 ano
+    try {
+        // Decodifica do Base64 para bytes UTF-8 e depois para string
+        const base64 = pair.slice(token.length)
+        const bytes = Uint8Array.from(atob(base64), c => c.charCodeAt(0))
+        const decoder = new TextDecoder()
+        return decoder.decode(bytes)
+    } catch (e) {
+        console.error('Erro ao decodificar cookie:', e)
+        return null
     }
 }
 
-elements.notificationToggle.addEventListener('change', setNotification)
+function setPopupState(popup) {
+    if (!elements.userName) return
 
-initNotificationState()
+    const validPopup = popup === POPUP_RESPONSE.NO
+        ? POPUP_RESPONSE.NO
+        : POPUP_RESPONSE.YES
 
-function initNotificationState() {
-    notificationLoaded = elements.notificationPanel.classList.contains('load')
-    if (notificationLoaded) {
+    elements.toggleLabel.textContent = validPopup
+}
+
+function togglePopup() {
+    const isCurrentlyNo = elements.toggleLabel?.textContent === POPUP_RESPONSE.NO
+    elements.notificationToggle.checked = isCurrentlyNo
+    const newPopup = isCurrentlyNo ? POPUP_RESPONSE.YES : POPUP_RESPONSE.NO
+    updateToggleLabel(isCurrentlyNo)
+    console.log(newPopup)
+    setCookie(STORAGE_KEYS.cookie.notifications, newPopup)
+    setPopupState(newPopup)
+}
+
+function updateToggleLabel(enabled) {
+  elements.toggleLabel.style.color = enabled ? '#8b5cf6' : '#ef4444';
+}
+
+function initPopup() {
+    try {
+        // Busca o valor salvo no cookie
+        const savedPopup = getCookie(STORAGE_KEYS.cookie.notifications)
+
+        // Define valor padrão se não existir
+        const popupState = savedPopup !== null ? savedPopup : 'Sim'
+
+        // Atualiza o checkbox se existir
+        if (elements.notificationToggle) {
+            elements.notificationToggle.checked = (popupState === 'Sim')
+        }
+
+        // Aplica o estado
+        setPopupState(popupState)
+
+        console.log('Popup inicializado:', popupState)
+        showPopup(popupState)
+    } catch (error) {
+        console.error('Erro ao inicializar popup:', error)
+        // Fallback para estado padrão em caso de erro
+        setPopupState('Sim')
+        if (elements.notificationToggle) {
+            elements.notificationToggle.checked = true
+        }
+    }
+}
+
+
+if (elements.notificationToggle) {
+    elements.notificationToggle.addEventListener('change', togglePopup)
+}
+
+function showPopup(cookieExists) {
+    const modalHidden = elements.loginModal?.classList.contains('hidden')
+
+    if (!modalHidden) return
+
+    if (cookieExists === 'Sim') {
         elements.notificationOverlay.classList.add('show')
         elements.notificationPanel.classList.add('show')
-        setCookie(STORAGE_KEYS.cookie.notifications, 'Não')
-        setNotification ()
     } else {
-        elements.notificationOverlay.classList.remove('show')
         elements.notificationPanel.classList.add('show')
-        setCookie(STORAGE_KEYS.cookie.notifications, 'Sim')
-        setNotification ()
+        elements.notificationBtn.classList.add('hidden')
     }
 }
+
+// Executa de forma segura
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPopup)
+} else {
+    initPopup()
+}
+
 
 elements.confirmBtn.addEventListener('click', () => {
     elements.notificationOverlay.classList.remove('show')
-    if (elements.toggleLabel.textContent === 'Sim') {
-     elements.notificationPanel.classList.add('load')
-     elements.notificationPanel.classList.remove('show')
-    } else {
-    elements.notificationPanel.classList.remove('load')
-    }
-})
+    elements.notificationBtn.classList.add('hidden')
+ })
