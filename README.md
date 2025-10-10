@@ -43,5 +43,5 @@ Cada estudo contém um README próprio com explicações, códigos e links útei
 
 ---
 
-📌 **Última atualização:** `08/10/2025`
+📌 **Última atualização:** `10/10/2025`
 
