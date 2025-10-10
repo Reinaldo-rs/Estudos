@@ -12,9 +12,9 @@ Este repositório contém meu progresso nos estudos de programação, organizado
 
 | Tecnologia  | Progresso |
 |-------------|----------|
-| HTML & CSS  | ![60%](https://progress-bar.dev/60) |
-| JavaScript  | ![50%](https://progress-bar.dev/50) |
-| Flutter     | ![20%](https://progress-bar.dev/20) |
+| HTML & CSS  | ![Progress](https://img.shields.io/badge/progress-60%25-blue) |
+| JavaScript  | ![Progress](https://img.shields.io/badge/progress-50%25-blue) |
+| Flutter     | ![Progress](https://img.shields.io/badge/progress-20%25-blue) |
 
 ## 📂 Estrutura dos Estudos
 Cada estudo contém um README próprio com explicações, códigos e links úteis.
@@ -32,7 +32,7 @@ Cada estudo contém um README próprio com explicações, códigos e links útei
 ## 📌 Como Usar
 1. Clone este repositório:  
    ```
-   git clone https://github.com/seu-usuario/estudos.git
+   git clone https://github.com/Reinaldo-rs/Estudos.git
    ```
 2. Navegue até o diretório desejado.
 3. Leia o `README.md` dentro de cada estudo para mais detalhes.
