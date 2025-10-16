@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Sistema de demonstração de armazenamento nativo no navegador usando Local Storage, Session Storage e Cookies">
+    <meta name="author" content="UserPreferences Project">
+    <title>Estatística na Programação</title>
+
+    <!-- Preconnect para melhor performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>Estatística na Programação</h1>
+    </header>
+
+    <main>
+        <h2>Cálculos Estatísticos</h2>
+        <input type="text" name="number" id="numbers" placeholder="Digite números separados por vírgula Ex: 1,2,3,4,5">
+        <button id="calculate">Calcular</button>
+
+        <section class="results-banner">
+
+            <div class="result-card arithmetic_mean">
+                <h3>Média Aritmética</h3>
+                <p class="result"></p>
+                <p class="result-text">
+                    A soma dos valores é <span class="sum"></span> e a quantidade de valores é <span
+                        class="count"></span>.
+                </p>
+            </div>
+
+            <div class="result-card mode">
+                <h3>Moda</h3>
+                <p class="result"></p>
+                <p class="result-text">
+                    O valor <span class="mode-value"></span> aparece <span class="mode-count"></span> vezes.
+                </p>
+            </div>
+
+            <div class="result-card median">
+                <h3>Mediana</h3>
+                <p class="result"></p>
+                <p class="result-text">
+                    A sequência ordenada é: <span class="ordered-sequence"></span> e o valor central é <span
+                        class="median-value"></span>.
+                </p>
+            </div>
+
+            <div class="result-card standard-deviation">
+                <h3>Desvio Padrão</h3>
+                <p class="result"></p>
+                <p class="result-text">
+                    A raiz quadrada da variância é <span class="variance-value"></span>.
+                </p>
+            </div>
+
+            <div class="result-card variance">
+                <h3>Variância</h3>
+                <p class="result"></p>
+                <p class="result-text">
+                    A média dos quadrados das diferenças em relação à média é <span
+                        class="variance-calculation"></span>.
+                </p>
+            </div>
+
+            <div class="result-card range">
+                <h3>Amplitude</h3>
+                <p class="result"></p>
+                <p class="result-text">
+                    A diferença entre o valor máximo <span class="max-value"></span> e o valor mínimo <span
+                        class="min-value"></span>.
+                </p>
+            </div>
+
+            <div class="result-card frequency">
+                <h3>Tabela de Frequência</h3>
+                <p class="result"></p>
+                <p class="result-text">
+                    Os dados são agrupados em <span class="number-of-classes"></span> classes.
+                </p>
+            </div>
+
+            <div class="result-card histogram">
+                <h3>Histograma</h3>
+                <p class="result"></p>
+                <p class="result-text">
+                    O gráfico exibe a distribuição de frequência dos dados agrupados.
+                </p>
+            </div>
+
+            <div class="result-card bar-graphs">
+                <h3>Gráfico de Barras</h3>
+                <p class="result"></p>
+                <p class="result-text">
+                    O gráfico exibe a frequência de cada categoria ou valor.
+                </p>
+            </div>
+
+            <div class="result-card quartiles-boxplot">
+                <h3>Quartis e Boxplot</h3>
+                <p class="result"></p>
+                <p class="result-text">
+                    O primeiro quartil é <span class="q1-value"></span>, o segundo (mediana) é <span
+                        class="q2-value"></span> e o terceiro é <span class="q3-value"></span>.
+                </p>
+            </div>
+
+            <div class="result-card weighted-mean">
+                <h3>Média Ponderada</h3>
+                <p class="result"></p>
+                <p class="result-text">
+                    A soma dos produtos de cada valor pelo seu peso é <span class="weighted-sum"></span>, dividida pela
+                    soma dos pesos.
+                </p>
+            </div>
+
+        </section>
+    </main>
+
+    <footer></footer>
+</body>
+
+</html>
